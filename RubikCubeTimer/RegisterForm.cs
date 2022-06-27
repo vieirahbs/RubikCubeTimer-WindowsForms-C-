@@ -33,7 +33,7 @@ namespace RubikCubeTimer
                     bool cadastroCriado = Usuario.CreateUsuario(txtName.Text, txtLogin.Text, txtSenha.Text);
                     if (cadastroCriado)
                     {
-                        MessageBox.Show("Account created successfully!", "Create your account");
+                        MessageBox.Show("Account created successfully!", "Rubik's Cube Timer - Create your account");
                         this.Close();
                         return;
                     }
@@ -41,7 +41,7 @@ namespace RubikCubeTimer
                 }
                 else
                 {
-                    MessageBox.Show("Account not created! Username already registered!", "Create your account");
+                    MessageBox.Show("Account not created! Username already registered!", "Rubik's Cube Timer - Create your account");
                     txtLogin.Focus();
                     return;
                 }

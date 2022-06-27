@@ -156,7 +156,7 @@ namespace RubikCubeTimer
             this.MaximizeBox = false;
             this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RegisterForm";
+            this.Text = "Create Your Account";
             this.ResumeLayout(false);
             this.PerformLayout();
 
