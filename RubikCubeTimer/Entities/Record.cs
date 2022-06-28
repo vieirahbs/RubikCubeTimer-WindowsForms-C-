@@ -14,7 +14,7 @@ namespace RubikCubeTimer.Entities
         public DateTime Data { get; set; }
 
 
-        public static List<Record> RecuperaRecords()
+        public static List<Record> RecuperaRecords(int id)
         {
             List<Record> retorno = new List<Record>();
             using (SqlConnection conexao = DBConnectionString.GetConnectionString())
@@ -23,7 +23,8 @@ namespace RubikCubeTimer.Entities
                 using (SqlCommand comando = new SqlCommand())
                 {
                     comando.Connection = conexao;
-                    comando.CommandText = "select * from RECORD";
+                    comando.CommandText = "select * from RECORD where ID_REC = @id";
+                    comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
                     SqlDataReader reader = comando.ExecuteReader();
 

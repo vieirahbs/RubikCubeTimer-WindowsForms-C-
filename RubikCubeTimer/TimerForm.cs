@@ -103,7 +103,7 @@ namespace RubikCubeTimer
             int centezimo = int.Parse(recordVect[2]);
             TimeSpan recordTS = new TimeSpan(0, minuto, segundo, centezimo);
 
-            List<Record> records = Record.RecuperaRecords();
+            List<Record> records = Record.RecuperaRecords(Usuario.Id);
 
             if (records.Count == 0)
             {
