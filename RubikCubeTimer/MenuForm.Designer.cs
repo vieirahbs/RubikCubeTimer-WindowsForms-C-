@@ -29,18 +29,19 @@ namespace RubikCubeTimer
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuForm));
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlRubikImage = new System.Windows.Forms.Panel();
             this.lblLogo = new System.Windows.Forms.Label();
             this.pctLogo = new System.Windows.Forms.PictureBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblLogin = new System.Windows.Forms.Label();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.btnRegister = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.pnlRubikImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).BeginInit();
@@ -110,6 +111,19 @@ namespace RubikCubeTimer
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1294, 338);
             this.pnlButtons.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label1.Location = new System.Drawing.Point(1147, 299);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 21);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "by André Vieira";
             // 
             // lblPassword
             // 
@@ -193,19 +207,6 @@ namespace RubikCubeTimer
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label1.Location = new System.Drawing.Point(1147, 299);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 21);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "by André Vieira";
-            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -213,6 +214,7 @@ namespace RubikCubeTimer
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1300, 708);
             this.Controls.Add(this.pnlMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuForm";
             this.Text = "Rubik\'s Cube Timer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

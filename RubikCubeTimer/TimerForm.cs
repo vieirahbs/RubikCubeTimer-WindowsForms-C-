@@ -35,7 +35,7 @@ namespace RubikCubeTimer
         private void TimerForm_Load(object sender, EventArgs e)
         {
             string[] nomeVect = Usuario.Nome.Split(' ');
-            btnMyAccount.Text = $"{nomeVect[0]}'s account";
+            lblNome.Text = $"Hello, {nomeVect[0]}!";
             stopwatch = new Stopwatch();
             btnStartStop.Focus();
             isActive = false;
@@ -66,7 +66,7 @@ namespace RubikCubeTimer
         private void StartTimerList()
         {
             lstTimes.Clear();
-            lstTimes.Columns.Insert(0, "", 35, HorizontalAlignment.Center);
+            lstTimes.Columns.Insert(0, "", 45, HorizontalAlignment.Center);
             lstTimes.Columns.Insert(1, "", 120, HorizontalAlignment.Center);
         }
 
@@ -94,15 +94,15 @@ namespace RubikCubeTimer
 
         }
 
-        private bool VerificaRecord(string record)
+        private bool VerificaRecord(string tempo)
         {
             bool retorno = false;
 
-            string[] recordVect = record.ToString().Split(':');
-            int minuto = int.Parse(recordVect[0]);
-            int segundo = int.Parse(recordVect[1]);
-            int centezimo = int.Parse(recordVect[2]);
-            TimeSpan recordTS = new TimeSpan(0, 0, minuto, segundo, centezimo);
+            string[] tempoVect = tempo.ToString().Split(':');
+            int minuto = int.Parse(tempoVect[0]);
+            int segundo = int.Parse(tempoVect[1]);
+            int centezimo = int.Parse(tempoVect[2]);
+            TimeSpan tempoTS = new TimeSpan(0, 0, minuto, segundo, centezimo);
 
             List<Record> records = Record.RecuperaRecords(Usuario.Id);
 
@@ -114,27 +114,28 @@ namespace RubikCubeTimer
                 resultado = MessageBox.Show(mensagem, this.Text, botoes);
                 if (resultado == DialogResult.Yes)
                 {
-                    retorno = Record.CreateNovoRecord(Usuario.Id, record, DateTime.Now.ToString("dd/MM/yyyy"));
+                    retorno = Record.CreateNovoRecord(Usuario.Id, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
                     lblMelhorTempo.Text = $"Best time: {lblTimer.Text} - {DateTime.Now.ToString("dd/MMM/yyyy")}";
                 }
             }
             else
             {
-                foreach (Record item in records)
+                Record recordAtual = Record.RecuperaRecordAtual(Usuario.Id);
+
+
+                if (tempoTS < recordAtual.MelhorTempo)
                 {
-                    if (recordTS < item.MelhorTempo)
+                    string mensagem = "Well done! You beat your record! Do you want to save it?";
+                    MessageBoxButtons botoes = MessageBoxButtons.YesNo;
+                    DialogResult resultado;
+                    resultado = MessageBox.Show(mensagem, this.Text, botoes);
+                    if (resultado == DialogResult.Yes)
                     {
-                        string mensagem = "Congratulation! You beat your record! Do you want to save it?";
-                        MessageBoxButtons botoes = MessageBoxButtons.YesNo;
-                        DialogResult resultado;
-                        resultado = MessageBox.Show(mensagem, this.Text, botoes);
-                        if (resultado == DialogResult.Yes)
-                        {
-                            retorno = Record.CreateNovoRecord(Usuario.Id, record, DateTime.Now.ToString("dd/MM/yyyy"));
-                            lblMelhorTempo.Text = $"Best time: {lblTimer.Text} - {DateTime.Now.ToString("dd/MMM/yyyy")}";
-                        }
+                        retorno = Record.CreateNovoRecord(Usuario.Id, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
+                        lblMelhorTempo.Text = $"Best time: {lblTimer.Text} - {DateTime.Now.ToString("dd/MMM/yyyy")}";
                     }
                 }
+
             }
 
             return retorno;
@@ -180,6 +181,9 @@ namespace RubikCubeTimer
             TimerForm_Load(this, new EventArgs());
         }
 
-       
+        private void tabControl_Click(object sender, EventArgs e)
+        {
+            btnStartStop.Focus();
+        }
     }
 }
