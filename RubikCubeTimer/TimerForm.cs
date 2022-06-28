@@ -66,7 +66,8 @@ namespace RubikCubeTimer
         private void StartTimerList()
         {
             lstTimes.Clear();
-            lstTimes.Columns.Insert(0, "", 120, HorizontalAlignment.Center);
+            lstTimes.Columns.Insert(0, "", 35, HorizontalAlignment.Center);
+            lstTimes.Columns.Insert(1, "", 120, HorizontalAlignment.Center);
         }
 
         private void timerRubik_Tick(object sender, EventArgs e)
@@ -101,7 +102,7 @@ namespace RubikCubeTimer
             int minuto = int.Parse(recordVect[0]);
             int segundo = int.Parse(recordVect[1]);
             int centezimo = int.Parse(recordVect[2]);
-            TimeSpan recordTS = new TimeSpan(0, minuto, segundo, centezimo);
+            TimeSpan recordTS = new TimeSpan(0, 0, minuto, segundo, centezimo);
 
             List<Record> records = Record.RecuperaRecords(Usuario.Id);
 
@@ -151,7 +152,8 @@ namespace RubikCubeTimer
             {
                 stopwatch.Stop();
                 isActive = false;
-                ListViewItem timesList = lstTimes.Items.Add(lblTimer.Text);
+                ListViewItem timesList = lstTimes.Items.Add((Contador + 1).ToString() + "-");
+                timesList.SubItems.Add(new ListViewItem.ListViewSubItem(null, lblTimer.Text));
                 VerificaRecord(lblTimer.Text);
                 CalculaMedia(lblTimer.Text);
             }
@@ -177,5 +179,7 @@ namespace RubikCubeTimer
         {
             TimerForm_Load(this, new EventArgs());
         }
+
+       
     }
 }

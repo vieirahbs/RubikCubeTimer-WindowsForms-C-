@@ -75,6 +75,7 @@ namespace RubikCubeTimer
             this.txtSenha.Size = new System.Drawing.Size(350, 37);
             this.txtSenha.TabIndex = 2;
             this.txtSenha.UseSystemPasswordChar = true;
+            this.txtSenha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSenha_KeyPress);
             // 
             // txtLogin
             // 
@@ -85,6 +86,7 @@ namespace RubikCubeTimer
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(350, 37);
             this.txtLogin.TabIndex = 1;
+            this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
             // 
             // btnRegister
             // 
@@ -124,6 +126,7 @@ namespace RubikCubeTimer
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(350, 37);
             this.txtName.TabIndex = 0;
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress);
             // 
             // label2
             // 

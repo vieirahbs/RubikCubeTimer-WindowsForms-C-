@@ -23,7 +23,7 @@ namespace RubikCubeTimer.Entities
                 using (SqlCommand comando = new SqlCommand())
                 {
                     comando.Connection = conexao;
-                    comando.CommandText = "select * from RECORD where ID_REC = @id";
+                    comando.CommandText = "select * from RECORD where ID_US = @id";
                     comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
                     SqlDataReader reader = comando.ExecuteReader();

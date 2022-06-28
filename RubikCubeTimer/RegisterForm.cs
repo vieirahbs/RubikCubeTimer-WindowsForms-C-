@@ -50,5 +50,30 @@ namespace RubikCubeTimer
             }
 
         }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnRegister_Click(btnRegister, new EventArgs());
+            }
+
+        }
+
+        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnRegister_Click(btnRegister, new EventArgs());
+            }
+        }
+
+        private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnRegister_Click(btnRegister, new EventArgs());
+            }
+        }
     }
 }
