@@ -34,6 +34,8 @@ namespace RubikCubeTimer
 
         private void TimerForm_Load(object sender, EventArgs e)
         {
+            #region Timer
+
             string[] nomeVect = Usuario.Nome.Split(' ');
             lblNome.Text = $"Hello, {nomeVect[0]}!";
             stopwatch = new Stopwatch();
@@ -46,6 +48,16 @@ namespace RubikCubeTimer
             lblMelhorTempo.Text = ObtemRecordAtual();
             lblAvarage.Text = "Average: 00:00:000";
             lblTimer.Text = "00:00:000";
+
+            #endregion
+
+            #region Myaccount
+
+            pnlAlterarSenha.Visible = false;
+            txtName.Enabled = false;
+            btnCancelNameEdit.Visible = false;
+            btnCancelSenhaEdit.Visible = false;
+            #endregion
         }
 
         private void CalculaMedia(string time)
@@ -184,6 +196,59 @@ namespace RubikCubeTimer
         private void tabControl_Click(object sender, EventArgs e)
         {
             btnStartStop.Focus();
+        }
+        private void btnEditarSalvarNome_Click(object sender, EventArgs e)
+        {
+            if (btnEditarSalvarNome.Text == "Edit name")
+            {
+                txtName.Enabled = true;
+                btnEditarSalvarNome.Text = "Save name";
+                btnEditarSalvarNome.BackColor = Color.LightSeaGreen;
+                btnCancelNameEdit.Visible = true;
+            }
+            else
+            {
+                //FAZER CONEXÃO COM O BANCO PARA ALTERAR NOME
+                txtName.Enabled = false;
+                btnEditarSalvarNome.Text = "Edit name";
+                btnEditarSalvarNome.BackColor = Color.DodgerBlue;
+                btnCancelNameEdit.Visible = false;
+            }
+            
+        }
+        private void btnAlterarSalvarSenha_Click(object sender, EventArgs e)
+        {
+            if (btnAlterarSalvarSenha.Text == "Change password")
+            {
+                pnlAlterarSenha.Visible = true;
+                btnAlterarSalvarSenha.Text = "Save new password";
+                btnAlterarSalvarSenha.BackColor = Color.LightSeaGreen;
+                btnCancelSenhaEdit.Visible = true;
+            }
+            else
+            {
+                //FAZER CONEXÃO COM O BANCO PARA ALTERAR SENHA
+                pnlAlterarSenha.Visible = false;
+                btnAlterarSalvarSenha.Text = "Change password";
+                btnAlterarSalvarSenha.BackColor = Color.DodgerBlue;
+                btnCancelSenhaEdit.Visible = false;
+            }
+        }
+
+        private void btnCancelNameEdite_Click(object sender, EventArgs e)
+        {
+            txtName.Enabled = false;
+            btnEditarSalvarNome.Text = "Edit name";
+            btnEditarSalvarNome.BackColor = Color.DodgerBlue;
+            btnCancelNameEdit.Visible = false;
+        }
+
+        private void btnCancelSenhaEdit_Click(object sender, EventArgs e)
+        {
+            pnlAlterarSenha.Visible = false;
+            btnAlterarSalvarSenha.Text = "Change password";
+            btnAlterarSalvarSenha.BackColor = Color.DodgerBlue;
+            btnCancelSenhaEdit.Visible = false;
         }
     }
 }
