@@ -120,5 +120,42 @@ namespace RubikCubeTimer.Entities
         }
 
         //DESKTOP-QINDOBS RUBIKCUBE_TIMER
+
+        public static bool UpdateUsuario(int id, string nome = "", string senha = "")
+        {
+            bool retorno = false;
+            try
+            {
+                using (SqlConnection conexao = DBConnectionString.GetConnectionString())
+                {
+                    conexao.Open();
+                    using (SqlCommand comando = new SqlCommand())
+                    {
+                        comando.Connection = conexao;
+                        if (nome != "")
+                        {
+                            comando.CommandText = "update USUARIO set NOME = @nome where ID_US = @id";
+                            comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = nome;
+                            comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
+                            retorno = (comando.ExecuteNonQuery() > 0);
+                        }
+                        else if (senha != "")
+                        {
+                            comando.CommandText = "update USUARIO set SENHA = @senha where ID_US = @id";
+                            comando.Parameters.Add("@senha", SqlDbType.VarChar).Value = CriptoHelper.HashMD5(senha);
+                            comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
+                            retorno = (comando.ExecuteNonQuery() > 0);
+                        }
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("An error occured", "Rubik's Cube Timer - Update name");
+            }
+            return retorno;
+        }
     }
 }

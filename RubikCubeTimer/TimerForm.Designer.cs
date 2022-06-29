@@ -30,6 +30,7 @@ namespace RubikCubeTimer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Times");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Times");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimerForm));
             this.lstTimes = new System.Windows.Forms.ListView();
@@ -57,6 +58,8 @@ namespace RubikCubeTimer
             this.tabTimer = new System.Windows.Forms.TabPage();
             this.tabMyAccount = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnCancelSenhaEdit = new System.Windows.Forms.Button();
+            this.btnCancelNameEdit = new System.Windows.Forms.Button();
             this.btnEditarSalvarNome = new System.Windows.Forms.Button();
             this.pnlAlterarSenha = new System.Windows.Forms.Panel();
             this.txtConfimaNovaSenha = new System.Windows.Forms.TextBox();
@@ -66,14 +69,19 @@ namespace RubikCubeTimer
             this.txtSenhaAtual = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblID = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblLogin = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAlterarSalvarSenha = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnCancelNameEdit = new System.Windows.Forms.Button();
-            this.btnCancelSenhaEdit = new System.Windows.Forms.Button();
+            this.tabMyRecords = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.cbxCubeTypes = new System.Windows.Forms.ComboBox();
+            this.lstMyRecords = new System.Windows.Forms.ListView();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.pnlRubikImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).BeginInit();
@@ -83,6 +91,8 @@ namespace RubikCubeTimer
             this.panel3.SuspendLayout();
             this.pnlAlterarSenha.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tabMyRecords.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstTimes
@@ -97,7 +107,7 @@ namespace RubikCubeTimer
             this.lstTimes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lstTimes.HideSelection = false;
             this.lstTimes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.lstTimes.Location = new System.Drawing.Point(3, 23);
             this.lstTimes.Name = "lstTimes";
             this.lstTimes.Size = new System.Drawing.Size(172, 544);
@@ -162,7 +172,7 @@ namespace RubikCubeTimer
             this.panel1.Controls.Add(this.btnStartStop);
             this.panel1.Controls.Add(this.radio3x3);
             this.panel1.Controls.Add(this.btnLogout);
-            this.panel1.Location = new System.Drawing.Point(204, 200);
+            this.panel1.Location = new System.Drawing.Point(204, 270);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1082, 427);
             this.panel1.TabIndex = 15;
@@ -350,7 +360,7 @@ namespace RubikCubeTimer
             this.lblMelhorTempo.BackColor = System.Drawing.Color.Transparent;
             this.lblMelhorTempo.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMelhorTempo.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMelhorTempo.Location = new System.Drawing.Point(8, 568);
+            this.lblMelhorTempo.Location = new System.Drawing.Point(6, 669);
             this.lblMelhorTempo.Name = "lblMelhorTempo";
             this.lblMelhorTempo.Size = new System.Drawing.Size(142, 27);
             this.lblMelhorTempo.TabIndex = 19;
@@ -397,6 +407,7 @@ namespace RubikCubeTimer
             // 
             this.tabControl.Controls.Add(this.tabTimer);
             this.tabControl.Controls.Add(this.tabMyAccount);
+            this.tabControl.Controls.Add(this.tabMyRecords);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -445,21 +456,53 @@ namespace RubikCubeTimer
             this.panel3.Controls.Add(this.btnAlterarSalvarSenha);
             this.panel3.Location = new System.Drawing.Point(6, 89);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(523, 502);
+            this.panel3.Size = new System.Drawing.Size(640, 554);
             this.panel3.TabIndex = 36;
+            // 
+            // btnCancelSenhaEdit
+            // 
+            this.btnCancelSenhaEdit.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnCancelSenhaEdit.BackColor = System.Drawing.Color.DarkGray;
+            this.btnCancelSenhaEdit.FlatAppearance.BorderSize = 0;
+            this.btnCancelSenhaEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelSenhaEdit.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCancelSenhaEdit.ForeColor = System.Drawing.Color.White;
+            this.btnCancelSenhaEdit.Location = new System.Drawing.Point(246, 234);
+            this.btnCancelSenhaEdit.Name = "btnCancelSenhaEdit";
+            this.btnCancelSenhaEdit.Size = new System.Drawing.Size(116, 37);
+            this.btnCancelSenhaEdit.TabIndex = 7;
+            this.btnCancelSenhaEdit.Text = "Cancel";
+            this.btnCancelSenhaEdit.UseVisualStyleBackColor = false;
+            this.btnCancelSenhaEdit.Click += new System.EventHandler(this.btnCancelSenhaEdit_Click);
+            // 
+            // btnCancelNameEdit
+            // 
+            this.btnCancelNameEdit.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnCancelNameEdit.BackColor = System.Drawing.Color.DarkGray;
+            this.btnCancelNameEdit.FlatAppearance.BorderSize = 0;
+            this.btnCancelNameEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelNameEdit.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCancelNameEdit.ForeColor = System.Drawing.Color.White;
+            this.btnCancelNameEdit.Location = new System.Drawing.Point(246, 15);
+            this.btnCancelNameEdit.Name = "btnCancelNameEdit";
+            this.btnCancelNameEdit.Size = new System.Drawing.Size(116, 37);
+            this.btnCancelNameEdit.TabIndex = 2;
+            this.btnCancelNameEdit.Text = "Cancel";
+            this.btnCancelNameEdit.UseVisualStyleBackColor = false;
+            this.btnCancelNameEdit.Click += new System.EventHandler(this.btnCancelNameEdite_Click);
             // 
             // btnEditarSalvarNome
             // 
-            this.btnEditarSalvarNome.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEditarSalvarNome.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnEditarSalvarNome.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnEditarSalvarNome.FlatAppearance.BorderSize = 0;
             this.btnEditarSalvarNome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditarSalvarNome.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnEditarSalvarNome.ForeColor = System.Drawing.Color.White;
-            this.btnEditarSalvarNome.Location = new System.Drawing.Point(257, 14);
+            this.btnEditarSalvarNome.Location = new System.Drawing.Point(370, 15);
             this.btnEditarSalvarNome.Name = "btnEditarSalvarNome";
             this.btnEditarSalvarNome.Size = new System.Drawing.Size(244, 37);
-            this.btnEditarSalvarNome.TabIndex = 30;
+            this.btnEditarSalvarNome.TabIndex = 0;
             this.btnEditarSalvarNome.Text = "Edit name";
             this.btnEditarSalvarNome.UseVisualStyleBackColor = false;
             this.btnEditarSalvarNome.Click += new System.EventHandler(this.btnEditarSalvarNome_Click);
@@ -473,9 +516,9 @@ namespace RubikCubeTimer
             this.pnlAlterarSenha.Controls.Add(this.label2);
             this.pnlAlterarSenha.Controls.Add(this.txtSenhaAtual);
             this.pnlAlterarSenha.Controls.Add(this.lblPassword);
-            this.pnlAlterarSenha.Location = new System.Drawing.Point(12, 225);
+            this.pnlAlterarSenha.Location = new System.Drawing.Point(12, 278);
             this.pnlAlterarSenha.Name = "pnlAlterarSenha";
-            this.pnlAlterarSenha.Size = new System.Drawing.Size(489, 266);
+            this.pnlAlterarSenha.Size = new System.Drawing.Size(602, 273);
             this.pnlAlterarSenha.TabIndex = 35;
             // 
             // txtConfimaNovaSenha
@@ -487,9 +530,10 @@ namespace RubikCubeTimer
             this.txtConfimaNovaSenha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtConfimaNovaSenha.Location = new System.Drawing.Point(20, 214);
             this.txtConfimaNovaSenha.Name = "txtConfimaNovaSenha";
-            this.txtConfimaNovaSenha.Size = new System.Drawing.Size(450, 37);
-            this.txtConfimaNovaSenha.TabIndex = 37;
+            this.txtConfimaNovaSenha.Size = new System.Drawing.Size(563, 37);
+            this.txtConfimaNovaSenha.TabIndex = 6;
             this.txtConfimaNovaSenha.UseSystemPasswordChar = true;
+            this.txtConfimaNovaSenha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConfimaNovaSenha_KeyPress);
             // 
             // label5
             // 
@@ -515,9 +559,10 @@ namespace RubikCubeTimer
             this.txtNovaSenha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtNovaSenha.Location = new System.Drawing.Point(20, 140);
             this.txtNovaSenha.Name = "txtNovaSenha";
-            this.txtNovaSenha.Size = new System.Drawing.Size(450, 37);
-            this.txtNovaSenha.TabIndex = 35;
+            this.txtNovaSenha.Size = new System.Drawing.Size(563, 37);
+            this.txtNovaSenha.TabIndex = 5;
             this.txtNovaSenha.UseSystemPasswordChar = true;
+            this.txtNovaSenha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNovaSenha_KeyPress);
             // 
             // label2
             // 
@@ -530,9 +575,9 @@ namespace RubikCubeTimer
             this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label2.Location = new System.Drawing.Point(20, 110);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(247, 27);
+            this.label2.Size = new System.Drawing.Size(256, 27);
             this.label2.TabIndex = 36;
-            this.label2.Text = "Inform you new password";
+            this.label2.Text = "Inform your new password";
             // 
             // txtSenhaAtual
             // 
@@ -543,9 +588,10 @@ namespace RubikCubeTimer
             this.txtSenhaAtual.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtSenhaAtual.Location = new System.Drawing.Point(20, 42);
             this.txtSenhaAtual.Name = "txtSenhaAtual";
-            this.txtSenhaAtual.Size = new System.Drawing.Size(450, 37);
-            this.txtSenhaAtual.TabIndex = 33;
+            this.txtSenhaAtual.Size = new System.Drawing.Size(563, 37);
+            this.txtSenhaAtual.TabIndex = 4;
             this.txtSenhaAtual.UseSystemPasswordChar = true;
+            this.txtSenhaAtual.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSenhaAtual_KeyPress);
             // 
             // lblPassword
             // 
@@ -566,6 +612,8 @@ namespace RubikCubeTimer
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lblID);
+            this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.lblUsername);
             this.panel2.Controls.Add(this.txtName);
             this.panel2.Controls.Add(this.lblLogin);
@@ -573,8 +621,38 @@ namespace RubikCubeTimer
             this.panel2.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel2.Location = new System.Drawing.Point(12, 57);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(489, 101);
+            this.panel2.Size = new System.Drawing.Size(602, 149);
             this.panel2.TabIndex = 32;
+            // 
+            // lblID
+            // 
+            this.lblID.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblID.AutoSize = true;
+            this.lblID.BackColor = System.Drawing.Color.Transparent;
+            this.lblID.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblID.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblID.Location = new System.Drawing.Point(121, 14);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(33, 27);
+            this.lblID.TabIndex = 34;
+            this.lblID.Text = "Id";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label7.Location = new System.Drawing.Point(82, 14);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 27);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Id:";
             // 
             // lblUsername
             // 
@@ -585,11 +663,11 @@ namespace RubikCubeTimer
             this.lblUsername.BackColor = System.Drawing.Color.Transparent;
             this.lblUsername.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblUsername.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblUsername.Location = new System.Drawing.Point(120, 9);
+            this.lblUsername.Location = new System.Drawing.Point(13, 52);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(102, 27);
+            this.lblUsername.Size = new System.Drawing.Size(110, 27);
             this.lblUsername.TabIndex = 32;
-            this.lblUsername.Text = "Username";
+            this.lblUsername.Text = "Username:";
             // 
             // txtName
             // 
@@ -598,10 +676,11 @@ namespace RubikCubeTimer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.txtName.Location = new System.Drawing.Point(120, 53);
+            this.txtName.Location = new System.Drawing.Point(120, 94);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(350, 37);
-            this.txtName.TabIndex = 22;
+            this.txtName.Size = new System.Drawing.Size(463, 37);
+            this.txtName.TabIndex = 1;
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress);
             // 
             // lblLogin
             // 
@@ -612,11 +691,11 @@ namespace RubikCubeTimer
             this.lblLogin.BackColor = System.Drawing.Color.Transparent;
             this.lblLogin.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblLogin.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblLogin.Location = new System.Drawing.Point(13, 9);
+            this.lblLogin.Location = new System.Drawing.Point(121, 52);
             this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(110, 27);
+            this.lblLogin.Size = new System.Drawing.Size(102, 27);
             this.lblLogin.TabIndex = 26;
-            this.lblLogin.Text = "Username:";
+            this.lblLogin.Text = "Username";
             // 
             // label4
             // 
@@ -627,11 +706,11 @@ namespace RubikCubeTimer
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label4.Location = new System.Drawing.Point(50, 58);
+            this.label4.Location = new System.Drawing.Point(50, 99);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 27);
+            this.label4.Size = new System.Drawing.Size(72, 27);
             this.label4.TabIndex = 28;
-            this.label4.Text = "Name";
+            this.label4.Text = "Name:";
             // 
             // btnAlterarSalvarSenha
             // 
@@ -641,10 +720,10 @@ namespace RubikCubeTimer
             this.btnAlterarSalvarSenha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAlterarSalvarSenha.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAlterarSalvarSenha.ForeColor = System.Drawing.Color.White;
-            this.btnAlterarSalvarSenha.Location = new System.Drawing.Point(257, 179);
+            this.btnAlterarSalvarSenha.Location = new System.Drawing.Point(370, 233);
             this.btnAlterarSalvarSenha.Name = "btnAlterarSalvarSenha";
             this.btnAlterarSalvarSenha.Size = new System.Drawing.Size(244, 39);
-            this.btnAlterarSalvarSenha.TabIndex = 33;
+            this.btnAlterarSalvarSenha.TabIndex = 3;
             this.btnAlterarSalvarSenha.Text = "Change password";
             this.btnAlterarSalvarSenha.UseVisualStyleBackColor = false;
             this.btnAlterarSalvarSenha.Click += new System.EventHandler(this.btnAlterarSalvarSenha_Click);
@@ -661,37 +740,66 @@ namespace RubikCubeTimer
             this.label3.TabIndex = 29;
             this.label3.Text = "My information";
             // 
-            // btnCancelNameEdit
+            // tabMyRecords
             // 
-            this.btnCancelNameEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancelNameEdit.BackColor = System.Drawing.Color.DarkGray;
-            this.btnCancelNameEdit.FlatAppearance.BorderSize = 0;
-            this.btnCancelNameEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelNameEdit.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCancelNameEdit.ForeColor = System.Drawing.Color.White;
-            this.btnCancelNameEdit.Location = new System.Drawing.Point(133, 14);
-            this.btnCancelNameEdit.Name = "btnCancelNameEdit";
-            this.btnCancelNameEdit.Size = new System.Drawing.Size(116, 37);
-            this.btnCancelNameEdit.TabIndex = 36;
-            this.btnCancelNameEdit.Text = "Cancel";
-            this.btnCancelNameEdit.UseVisualStyleBackColor = false;
-            this.btnCancelNameEdit.Click += new System.EventHandler(this.btnCancelNameEdite_Click);
+            this.tabMyRecords.Controls.Add(this.panel4);
+            this.tabMyRecords.Controls.Add(this.label6);
+            this.tabMyRecords.Location = new System.Drawing.Point(4, 44);
+            this.tabMyRecords.Name = "tabMyRecords";
+            this.tabMyRecords.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMyRecords.Size = new System.Drawing.Size(1289, 701);
+            this.tabMyRecords.TabIndex = 2;
+            this.tabMyRecords.Text = "My records";
+            this.tabMyRecords.UseVisualStyleBackColor = true;
             // 
-            // btnCancelSenhaEdit
+            // panel4
             // 
-            this.btnCancelSenhaEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancelSenhaEdit.BackColor = System.Drawing.Color.DarkGray;
-            this.btnCancelSenhaEdit.FlatAppearance.BorderSize = 0;
-            this.btnCancelSenhaEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelSenhaEdit.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCancelSenhaEdit.ForeColor = System.Drawing.Color.White;
-            this.btnCancelSenhaEdit.Location = new System.Drawing.Point(133, 180);
-            this.btnCancelSenhaEdit.Name = "btnCancelSenhaEdit";
-            this.btnCancelSenhaEdit.Size = new System.Drawing.Size(116, 37);
-            this.btnCancelSenhaEdit.TabIndex = 37;
-            this.btnCancelSenhaEdit.Text = "Cancel";
-            this.btnCancelSenhaEdit.UseVisualStyleBackColor = false;
-            this.btnCancelSenhaEdit.Click += new System.EventHandler(this.btnCancelSenhaEdit_Click);
+            this.panel4.Controls.Add(this.cbxCubeTypes);
+            this.panel4.Controls.Add(this.lstMyRecords);
+            this.panel4.Location = new System.Drawing.Point(73, 69);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(503, 529);
+            this.panel4.TabIndex = 31;
+            // 
+            // cbxCubeTypes
+            // 
+            this.cbxCubeTypes.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.cbxCubeTypes.FormattingEnabled = true;
+            this.cbxCubeTypes.Location = new System.Drawing.Point(0, 0);
+            this.cbxCubeTypes.Name = "cbxCubeTypes";
+            this.cbxCubeTypes.Size = new System.Drawing.Size(316, 43);
+            this.cbxCubeTypes.TabIndex = 2;
+            this.cbxCubeTypes.SelectedIndexChanged += new System.EventHandler(this.cbxCubeTypes_SelectedIndexChanged);
+            // 
+            // lstMyRecords
+            // 
+            this.lstMyRecords.BackColor = System.Drawing.Color.White;
+            this.lstMyRecords.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstMyRecords.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lstMyRecords.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lstMyRecords.FullRowSelect = true;
+            this.lstMyRecords.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lstMyRecords.HideSelection = false;
+            this.lstMyRecords.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.lstMyRecords.Location = new System.Drawing.Point(0, 49);
+            this.lstMyRecords.Name = "lstMyRecords";
+            this.lstMyRecords.Size = new System.Drawing.Size(503, 529);
+            this.lstMyRecords.TabIndex = 1;
+            this.lstMyRecords.UseCompatibleStateImageBehavior = false;
+            this.lstMyRecords.View = System.Windows.Forms.View.Details;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label6.Location = new System.Drawing.Point(73, 17);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(192, 49);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Cube type";
             // 
             // TimerForm
             // 
@@ -722,6 +830,9 @@ namespace RubikCubeTimer
             this.pnlAlterarSenha.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.tabMyRecords.ResumeLayout(false);
+            this.tabMyRecords.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -769,5 +880,12 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnCancelSenhaEdit;
         private System.Windows.Forms.Button btnCancelNameEdit;
+        private System.Windows.Forms.Label lblID;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabMyRecords;
+        private System.Windows.Forms.ListView lstMyRecords;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbxCubeTypes;
+        private System.Windows.Forms.Panel panel4;
     }
 }

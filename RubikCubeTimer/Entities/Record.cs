@@ -10,6 +10,7 @@ namespace RubikCubeTimer.Entities
     public class Record
     {
         public int Id { get; set; }
+        public CubeType TipoCubo {get; set;}
         public TimeSpan MelhorTempo { get; set; }
         public DateTime Data { get; set; }
 
@@ -46,6 +47,7 @@ namespace RubikCubeTimer.Entities
                         retorno.Add(new Record
                         {
                             Id = (int)reader["ID_REC"],
+                            TipoCubo = (CubeType)reader["TIPO_CUBO"],
                             MelhorTempo = record,
                             Data = date
                         });
@@ -90,6 +92,7 @@ namespace RubikCubeTimer.Entities
                             retorno = new Record
                             {
                                 Id = (int)reader["ID_REC"],
+                                TipoCubo = (CubeType)reader["TIPO_CUBO"],
                                 MelhorTempo = record,
                                 Data = date
                             };

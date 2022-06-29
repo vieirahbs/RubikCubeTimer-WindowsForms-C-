@@ -51,12 +51,28 @@ namespace RubikCubeTimer
 
             #endregion
 
-            #region Myaccount
-
+            #region My account
+            lblID.Text = Usuario.Id.ToString();
+            lblLogin.Text = Usuario.Login;
+            txtName.Text = Usuario.Nome;
             pnlAlterarSenha.Visible = false;
             txtName.Enabled = false;
             btnCancelNameEdit.Visible = false;
             btnCancelSenhaEdit.Visible = false;
+            #endregion
+
+            #region My records
+            cbxCubeTypes.Items.Add("2x2");
+            cbxCubeTypes.Items.Add("3x3");
+            cbxCubeTypes.Items.Add("4x4");
+            cbxCubeTypes.Items.Add("5x5");
+            cbxCubeTypes.Items.Add("Megaminx");
+            cbxCubeTypes.Items.Add("Piraminx");
+            cbxCubeTypes.Items.Add("Mirror Blocks");
+            StartRecodList();
+            cbxCubeTypes.SelectedIndex = 1;
+
+            
             #endregion
         }
 
@@ -82,6 +98,14 @@ namespace RubikCubeTimer
             lstTimes.Columns.Insert(1, "", 120, HorizontalAlignment.Center);
         }
 
+        private void StartRecodList()
+        {
+            lstMyRecords.Clear();
+            lstMyRecords.Columns.Insert(0, "", 45, HorizontalAlignment.Center);
+            lstMyRecords.Columns.Insert(1, "Time", 120, HorizontalAlignment.Center);
+            lstMyRecords.Columns.Insert(2, "Date", 150, HorizontalAlignment.Center);
+        }
+
         private void timerRubik_Tick(object sender, EventArgs e)
         {
             if (isActive)
@@ -96,8 +120,23 @@ namespace RubikCubeTimer
 
             if (recordATual.Id != 0)
             {
-                return $"Best time: {string.Format("{0:mm\\:ss\\:fff} ", recordATual.MelhorTempo)} - " +
-                                $"{recordATual.Data.ToString("dd/MMM/yyyy")}";
+                if (recordATual.TipoCubo == CubeType.C2x2 ||
+                    recordATual.TipoCubo == CubeType.C3x3 ||
+                    recordATual.TipoCubo == CubeType.C4x4 ||
+                    recordATual.TipoCubo == CubeType.C5x5)
+                {
+                    string tipoCubo = recordATual.TipoCubo.ToString().Substring(1);
+
+                    return $"Best time in {tipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", recordATual.MelhorTempo)}- " +
+                                    $"{recordATual.Data.ToString("dd/MMM/yyyy")}";
+                }
+                else
+                {
+                    string tipoCubo = recordATual.TipoCubo.ToString().Substring(1);
+
+                    return $"Best time in {recordATual.TipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", recordATual.MelhorTempo)}- " +
+                                    $"{recordATual.Data.ToString("dd/MMM/yyyy")}";
+                }
             }
             else
             {
@@ -208,13 +247,32 @@ namespace RubikCubeTimer
             }
             else
             {
-                //FAZER CONEXÃO COM O BANCO PARA ALTERAR NOME
-                txtName.Enabled = false;
-                btnEditarSalvarNome.Text = "Edit name";
-                btnEditarSalvarNome.BackColor = Color.DodgerBlue;
-                btnCancelNameEdit.Visible = false;
+                if (txtName.Text == string.Empty.Trim())
+                {
+                    MessageBox.Show("The name field cannot be empty!", this.Text);
+                    return;
+                }
+
+                bool nomeAtualizado = Usuario.UpdateUsuario(Usuario.Id, txtName.Text);
+
+                if (nomeAtualizado)
+                {
+                    txtName.Enabled = false;
+                    btnEditarSalvarNome.Text = "Edit name";
+                    btnEditarSalvarNome.BackColor = Color.DodgerBlue;
+                    btnCancelNameEdit.Visible = false;
+                    string[] nomeVect = txtName.Text.Split(' ');
+                    lblNome.Text = $"Hello, {nomeVect[0]}!";
+                    MessageBox.Show("Name updated successfully!", this.Text);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("An error occurred. The name was not updated!", this.Text);
+                    return;
+                }
             }
-            
+
         }
         private void btnAlterarSalvarSenha_Click(object sender, EventArgs e)
         {
@@ -227,11 +285,43 @@ namespace RubikCubeTimer
             }
             else
             {
-                //FAZER CONEXÃO COM O BANCO PARA ALTERAR SENHA
-                pnlAlterarSenha.Visible = false;
-                btnAlterarSalvarSenha.Text = "Change password";
-                btnAlterarSalvarSenha.BackColor = Color.DodgerBlue;
-                btnCancelSenhaEdit.Visible = false;
+                if (txtSenhaAtual.Text == string.Empty.Trim() ||
+                    txtNovaSenha.Text == string.Empty.Trim() ||
+                    txtConfimaNovaSenha.Text == string.Empty.Trim())
+                {
+                    MessageBox.Show("Fill in all the fields!", this.Text);
+                    return;
+                }
+                else if (txtNovaSenha.Text != txtConfimaNovaSenha.Text)
+                {
+                    MessageBox.Show("'New password' and 'Confirm new password' must match!", this.Text);
+                    return;
+                }
+
+                Usuario usuarioDB = Usuario.ValidaUsuario(Usuario.Login, txtSenhaAtual.Text);
+
+                if (usuarioDB.Login == null)
+                {
+                    MessageBox.Show("The current password informed is not correct.", this.Text);
+                    return;
+                }
+                else
+                {
+                    bool senhaAtualizada = Usuario.UpdateUsuario(Usuario.Id, "", txtNovaSenha.Text);
+
+                    if (senhaAtualizada)
+                    {
+                        pnlAlterarSenha.Visible = false;
+                        btnAlterarSalvarSenha.Text = "Change password";
+                        btnAlterarSalvarSenha.BackColor = Color.DodgerBlue;
+                        btnCancelSenhaEdit.Visible = false;
+                        txtSenhaAtual.Text = string.Empty;
+                        txtNovaSenha.Text = string.Empty;
+                        txtConfimaNovaSenha.Text = string.Empty;
+                        MessageBox.Show("Password updated successfully", this.Text);
+                        return;
+                    }
+                }
             }
         }
 
@@ -249,6 +339,71 @@ namespace RubikCubeTimer
             btnAlterarSalvarSenha.Text = "Change password";
             btnAlterarSalvarSenha.BackColor = Color.DodgerBlue;
             btnCancelSenhaEdit.Visible = false;
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnEditarSalvarNome_Click(btnEditarSalvarNome, new EventArgs());
+            }
+        }
+
+        private void txtSenhaAtual_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnAlterarSalvarSenha_Click(btnAlterarSalvarSenha, new EventArgs());
+            }
+        }
+
+        private void txtNovaSenha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnAlterarSalvarSenha_Click(btnAlterarSalvarSenha, new EventArgs());
+            }
+        }
+
+        private void txtConfimaNovaSenha_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnAlterarSalvarSenha_Click(btnAlterarSalvarSenha, new EventArgs());
+            }
+        }
+
+        private void cbxCubeTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstMyRecords.Clear();
+            StartRecodList();
+            List<Record> records = Record.RecuperaRecords(Usuario.Id);
+            if (cbxCubeTypes.SelectedIndex == 1)
+            {
+                int count = 1;
+
+                foreach (Record record in records)
+                {
+                    string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
+                    ListViewItem recordList = lstMyRecords.Items.Add((count).ToString() + "-");
+                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, tempo.ToString()));
+                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, record.Data.ToString("dd/MM/yyyy")));
+                    count++;
+                }
+            }
+            else
+            {
+                int count = 1;
+
+                foreach (Record record in records)
+                {
+                    string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
+                    ListViewItem recordList = lstMyRecords.Items.Add("");
+                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, ""));
+                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, ""));
+                    count++;
+                }
+            }
         }
     }
 }
