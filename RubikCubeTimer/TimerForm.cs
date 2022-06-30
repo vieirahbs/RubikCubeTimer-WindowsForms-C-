@@ -59,9 +59,12 @@ namespace RubikCubeTimer
             txtName.Enabled = false;
             btnCancelNameEdit.Visible = false;
             btnCancelSenhaEdit.Visible = false;
+            pnlDeleteMyAccount.Visible = false;
+            btnCancelDeletion.Visible = false;
             #endregion
 
             #region My records
+            cbxCubeTypes.Items.Clear();
             cbxCubeTypes.Items.Add("2x2");
             cbxCubeTypes.Items.Add("3x3");
             cbxCubeTypes.Items.Add("4x4");
@@ -72,7 +75,7 @@ namespace RubikCubeTimer
             StartRecodList();
             cbxCubeTypes.SelectedIndex = 1;
 
-            
+
             #endregion
         }
 
@@ -116,7 +119,11 @@ namespace RubikCubeTimer
 
         private string ObtemRecordAtual()
         {
-            Record recordATual = Record.RecuperaRecordAtual(Usuario.Id);
+            Record recordATual = new Record();
+            if (radio3x3.Checked)
+            {
+                recordATual = Record.RecuperaRecordAtual(Usuario.Id, CubeType.C3x3);
+            }
 
             if (recordATual.Id != 0)
             {
@@ -165,14 +172,20 @@ namespace RubikCubeTimer
                 resultado = MessageBox.Show(mensagem, this.Text, botoes);
                 if (resultado == DialogResult.Yes)
                 {
-                    retorno = Record.CreateNovoRecord(Usuario.Id, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
+                    if (radio3x3.Checked)
+                    {
+                        retorno = Record.CreateNovoRecord(Usuario.Id, CubeType.C3x3, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
+                    }
                     lblMelhorTempo.Text = $"Best time: {lblTimer.Text} - {DateTime.Now.ToString("dd/MMM/yyyy")}";
                 }
             }
             else
             {
-                Record recordAtual = Record.RecuperaRecordAtual(Usuario.Id);
-
+                Record recordAtual = new Record();
+                if (radio3x3.Checked)
+                {
+                    recordAtual = Record.RecuperaRecordAtual(Usuario.Id, CubeType.C3x3);
+                }
 
                 if (tempoTS < recordAtual.MelhorTempo)
                 {
@@ -182,7 +195,11 @@ namespace RubikCubeTimer
                     resultado = MessageBox.Show(mensagem, this.Text, botoes);
                     if (resultado == DialogResult.Yes)
                     {
-                        retorno = Record.CreateNovoRecord(Usuario.Id, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
+                        if (radio3x3.Checked)
+                        {
+                            retorno = Record.CreateNovoRecord(Usuario.Id, CubeType.C3x3, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
+                        }
+
                         lblMelhorTempo.Text = $"Best time: {lblTimer.Text} - {DateTime.Now.ToString("dd/MMM/yyyy")}";
                     }
                 }
@@ -250,6 +267,7 @@ namespace RubikCubeTimer
                 if (txtName.Text == string.Empty.Trim())
                 {
                     MessageBox.Show("The name field cannot be empty!", this.Text);
+                    txtName.Focus();
                     return;
                 }
 
@@ -295,6 +313,9 @@ namespace RubikCubeTimer
                 else if (txtNovaSenha.Text != txtConfimaNovaSenha.Text)
                 {
                     MessageBox.Show("'New password' and 'Confirm new password' must match!", this.Text);
+                    txtNovaSenha.Text = string.Empty;
+                    txtConfimaNovaSenha.Text = string.Empty;
+                    txtNovaSenha.Focus();
                     return;
                 }
 
@@ -303,6 +324,8 @@ namespace RubikCubeTimer
                 if (usuarioDB.Login == null)
                 {
                     MessageBox.Show("The current password informed is not correct.", this.Text);
+                    txtSenhaAtual.Text = string.Empty;
+                    txtSenhaAtual.Focus();
                     return;
                 }
                 else
@@ -404,6 +427,69 @@ namespace RubikCubeTimer
                     count++;
                 }
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (btnDelete.Text == "Delete my account")
+            {
+                btnDelete.Text = "Confirm deletion";
+                pnlDeleteMyAccount.Visible = true;
+                btnCancelDeletion.Visible = true;
+            }
+            else if (btnDelete.Text == "Confirm deletion")
+            {
+                if (txtDeleteAccount.Text == string.Empty.Trim())
+                {
+                    MessageBox.Show("Inform your password to proceed.", this.Text);
+                    return;
+                }
+                string mensagem = "Are you sure you want to delete your account?";
+                MessageBoxButtons botoes = MessageBoxButtons.YesNo;
+                DialogResult resultado;
+                resultado = MessageBox.Show(mensagem, this.Text, botoes);
+                if (resultado == DialogResult.Yes)
+                {
+                    bool contaDeletada = Usuario.DeleteUsuario(Usuario.Id, Usuario.Login, txtDeleteAccount.Text);
+                    if (contaDeletada)
+                    {
+                        MessageBox.Show("Your account was deleted successfully.", this.Text);
+                        btnLogout_Click(this, new EventArgs());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect password.", this.Text);
+                        txtDeleteAccount.Text = string.Empty;
+                        txtDeleteAccount.Focus();
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void txtDeleteAccount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(13))
+            {
+                btnDelete_Click(btnDelete, new EventArgs());
+            }
+        }
+
+        private void btnCancelDeletion_Click(object sender, EventArgs e)
+        {
+            btnDelete.Text = "Delete my account";
+            pnlDeleteMyAccount.Visible = false;
+            btnCancelDeletion.Visible = false;
+        }
+
+        private void radio3x3_CheckedChanged(object sender, EventArgs e)
+        {
+            lblMelhorTempo.Text = ObtemRecordAtual();
+        }
+
+        private void radio2x2_CheckedChanged(object sender, EventArgs e)
+        {
+            TimerForm_Load(this, new EventArgs());
         }
     }
 }

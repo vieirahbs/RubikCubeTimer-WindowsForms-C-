@@ -17,7 +17,7 @@ namespace RubikCubeTimer.Entities
         public string Login { get; set; }
         public string Senha { get; set; }
         public Record Record { get; set; }
-        
+
         public Usuario()
         {
         }
@@ -50,7 +50,7 @@ namespace RubikCubeTimer.Entities
             {
                 MessageBox.Show("An error occured", "Rubik's Cube Timer - Create your account");
             }
-            
+
             return retorno;
         }
 
@@ -60,7 +60,7 @@ namespace RubikCubeTimer.Entities
             try
             {
                 using (SqlConnection conexao = DBConnectionString.GetConnectionString())
-                {   
+                {
                     conexao.Open();
                     using (SqlCommand comando = new SqlCommand())
                     {
@@ -82,7 +82,7 @@ namespace RubikCubeTimer.Entities
 
             return retorno;
         }
-        
+
         public static Usuario ValidaUsuario(string login, string senha)
         {
             Usuario retorno = new Usuario();
@@ -157,5 +157,36 @@ namespace RubikCubeTimer.Entities
             }
             return retorno;
         }
+
+        public static bool DeleteUsuario(int id, string login, string senha)
+        {
+            bool retorno = false;
+            try
+            {
+                Usuario usuario = ValidaUsuario(login, senha);
+                if (usuario.Login != null)
+                {
+                    using (SqlConnection conexao = DBConnectionString.GetConnectionString())
+                    {
+                        conexao.Open();
+                        using (SqlCommand comando = new SqlCommand())
+                        {
+                            comando.Connection = conexao;
+                            comando.CommandText = "delete from RECORD where ID_US = @id; " +
+                                "delete from USUARIO where ID_US = @id";
+                            comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                            retorno = (comando.ExecuteNonQuery() > 0);
+                        }
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("An error occured", "Rubik's Cube Timer - Delete account");
+            }
+
+            return retorno;
+        }
+
     }
 }

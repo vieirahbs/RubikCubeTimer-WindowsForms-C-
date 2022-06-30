@@ -22,7 +22,7 @@ namespace RubikCubeTimer
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtLogin.Text == string.Empty || txtSenha.Text == string.Empty)
+            if (txtLogin.Text == string.Empty.Trim() || txtSenha.Text == string.Empty.Trim())
             {
                 MessageBox.Show("Fill in all the fields.", "Rubik's Cube Timer - Login");
                 return;

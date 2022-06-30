@@ -57,6 +57,11 @@ namespace RubikCubeTimer
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabTimer = new System.Windows.Forms.TabPage();
             this.tabMyAccount = new System.Windows.Forms.TabPage();
+            this.btnCancelDeletion = new System.Windows.Forms.Button();
+            this.pnlDeleteMyAccount = new System.Windows.Forms.Panel();
+            this.txtDeleteAccount = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCancelSenhaEdit = new System.Windows.Forms.Button();
             this.btnCancelNameEdit = new System.Windows.Forms.Button();
@@ -88,6 +93,7 @@ namespace RubikCubeTimer
             this.tabControl.SuspendLayout();
             this.tabTimer.SuspendLayout();
             this.tabMyAccount.SuspendLayout();
+            this.pnlDeleteMyAccount.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnlAlterarSenha.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -323,6 +329,7 @@ namespace RubikCubeTimer
             this.radio2x2.TabIndex = 3;
             this.radio2x2.Text = "2x2";
             this.radio2x2.UseVisualStyleBackColor = true;
+            this.radio2x2.CheckedChanged += new System.EventHandler(this.radio2x2_CheckedChanged);
             // 
             // radio3x3
             // 
@@ -340,6 +347,7 @@ namespace RubikCubeTimer
             this.radio3x3.TabStop = true;
             this.radio3x3.Text = "3x3";
             this.radio3x3.UseVisualStyleBackColor = true;
+            this.radio3x3.CheckedChanged += new System.EventHandler(this.radio3x3_CheckedChanged);
             // 
             // label1
             // 
@@ -435,6 +443,9 @@ namespace RubikCubeTimer
             // 
             // tabMyAccount
             // 
+            this.tabMyAccount.Controls.Add(this.btnCancelDeletion);
+            this.tabMyAccount.Controls.Add(this.pnlDeleteMyAccount);
+            this.tabMyAccount.Controls.Add(this.btnDelete);
             this.tabMyAccount.Controls.Add(this.panel3);
             this.tabMyAccount.Controls.Add(this.label3);
             this.tabMyAccount.ForeColor = System.Drawing.Color.DodgerBlue;
@@ -445,6 +456,79 @@ namespace RubikCubeTimer
             this.tabMyAccount.TabIndex = 1;
             this.tabMyAccount.Text = "My account";
             this.tabMyAccount.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelDeletion
+            // 
+            this.btnCancelDeletion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelDeletion.BackColor = System.Drawing.Color.DarkGray;
+            this.btnCancelDeletion.FlatAppearance.BorderSize = 0;
+            this.btnCancelDeletion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelDeletion.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCancelDeletion.ForeColor = System.Drawing.Color.White;
+            this.btnCancelDeletion.Location = new System.Drawing.Point(962, 632);
+            this.btnCancelDeletion.Name = "btnCancelDeletion";
+            this.btnCancelDeletion.Size = new System.Drawing.Size(120, 31);
+            this.btnCancelDeletion.TabIndex = 36;
+            this.btnCancelDeletion.Text = "Cancel";
+            this.btnCancelDeletion.UseVisualStyleBackColor = false;
+            this.btnCancelDeletion.Click += new System.EventHandler(this.btnCancelDeletion_Click);
+            // 
+            // pnlDeleteMyAccount
+            // 
+            this.pnlDeleteMyAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlDeleteMyAccount.Controls.Add(this.txtDeleteAccount);
+            this.pnlDeleteMyAccount.Controls.Add(this.label8);
+            this.pnlDeleteMyAccount.Location = new System.Drawing.Point(955, 548);
+            this.pnlDeleteMyAccount.Name = "pnlDeleteMyAccount";
+            this.pnlDeleteMyAccount.Size = new System.Drawing.Size(292, 78);
+            this.pnlDeleteMyAccount.TabIndex = 41;
+            // 
+            // txtDeleteAccount
+            // 
+            this.txtDeleteAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDeleteAccount.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtDeleteAccount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.txtDeleteAccount.Location = new System.Drawing.Point(7, 36);
+            this.txtDeleteAccount.Name = "txtDeleteAccount";
+            this.txtDeleteAccount.Size = new System.Drawing.Size(277, 37);
+            this.txtDeleteAccount.TabIndex = 39;
+            this.txtDeleteAccount.UseSystemPasswordChar = true;
+            this.txtDeleteAccount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDeleteAccount_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.ForeColor = System.Drawing.Color.IndianRed;
+            this.label8.Location = new System.Drawing.Point(7, 6);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(214, 27);
+            this.label8.TabIndex = 40;
+            this.label8.Text = "Inform your password";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.BackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDelete.ForeColor = System.Drawing.Color.IndianRed;
+            this.btnDelete.Location = new System.Drawing.Point(1088, 632);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(159, 31);
+            this.btnDelete.TabIndex = 36;
+            this.btnDelete.Text = "Delete my account";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // panel3
             // 
@@ -825,6 +909,8 @@ namespace RubikCubeTimer
             this.tabTimer.PerformLayout();
             this.tabMyAccount.ResumeLayout(false);
             this.tabMyAccount.PerformLayout();
+            this.pnlDeleteMyAccount.ResumeLayout(false);
+            this.pnlDeleteMyAccount.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.pnlAlterarSenha.ResumeLayout(false);
             this.pnlAlterarSenha.PerformLayout();
@@ -887,5 +973,10 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbxCubeTypes;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox txtDeleteAccount;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnCancelDeletion;
+        private System.Windows.Forms.Panel pnlDeleteMyAccount;
     }
 }

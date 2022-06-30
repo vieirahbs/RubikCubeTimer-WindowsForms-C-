@@ -18,8 +18,8 @@ namespace RubikCubeTimer
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (txtName.Text == string.Empty || txtLogin.Text == string.Empty ||
-                txtSenha.Text == string.Empty)
+            if (txtName.Text == string.Empty.Trim() || txtLogin.Text == string.Empty.Trim() ||
+                txtSenha.Text == string.Empty.Trim())
             {
                 MessageBox.Show("Fill in all the fields.", "Create your account");
                 return;

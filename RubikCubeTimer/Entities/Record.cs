@@ -58,7 +58,7 @@ namespace RubikCubeTimer.Entities
             return retorno;
         }        
 
-        public static Record RecuperaRecordAtual(int id)
+        public static Record RecuperaRecordAtual(int id, CubeType cuboTipo)
         {
             Record retorno = new Record();
             try
@@ -69,8 +69,10 @@ namespace RubikCubeTimer.Entities
                     using (SqlCommand comando = new SqlCommand())
                     {
                         comando.Connection = conexao;
-                        comando.CommandText = "select top 1 * from RECORD where ID_US = @id order by MELHOR_TEMPO asc";
+                        comando.CommandText = "select top 1 * from RECORD where ID_US = @id " +
+                            "and TIPO_CUBO = @cuboTipo order by MELHOR_TEMPO asc";
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                        comando.Parameters.Add("@cuboTipo", SqlDbType.Int).Value = cuboTipo;
 
                         SqlDataReader reader = comando.ExecuteReader();
 
@@ -110,7 +112,7 @@ namespace RubikCubeTimer.Entities
         }
 
         //DESKTOP-QINDOBS RUBIKCUBE_TIMER
-        public static bool CreateNovoRecord(int id, string record, string data)
+        public static bool CreateNovoRecord(int id, CubeType tipoCubo, string record, string data)
         {
             bool retorno = false;
             try
@@ -122,8 +124,9 @@ namespace RubikCubeTimer.Entities
                     using (SqlCommand comando = new SqlCommand())
                     {
                         comando.Connection = conexao;
-                        comando.CommandText = "insert into RECORD values (@id, @record, @data)";
+                        comando.CommandText = "insert into RECORD values (@id, @tipoCubo, @record, @data)";
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                        comando.Parameters.Add("@tipoCubo", SqlDbType.Int).Value = tipoCubo;
                         comando.Parameters.Add("@record", SqlDbType.VarChar).Value = record;
                         comando.Parameters.Add("@data", SqlDbType.VarChar).Value = data;
 
