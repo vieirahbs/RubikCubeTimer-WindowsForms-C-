@@ -15,6 +15,9 @@ namespace RubikCubeTimer
     public partial class TimerForm : Form
     {
         public Usuario Usuario { get; set; }
+        public Record Record { get; set; }
+        public CubeType TipoCubo { get; set; }
+        public List<Record> Records { get; set; } = new List<Record>();
         private TimeSpan TempoTotal { get; set; }
 
         private int Contador = 0;
@@ -44,6 +47,7 @@ namespace RubikCubeTimer
             isReset = true;
             StartTimerList();
             Contador = 0;
+            radio3x3.Checked = true;
             TempoTotal = new TimeSpan();
             lblMelhorTempo.Text = ObtemRecordAtual();
             lblAvarage.Text = "Average: 00:00:000";
@@ -74,11 +78,10 @@ namespace RubikCubeTimer
             cbxCubeTypes.Items.Add("Mirror Blocks");
             StartRecodList();
             cbxCubeTypes.SelectedIndex = 1;
-
-
             #endregion
         }
 
+        #region Métodos
         private void CalculaMedia(string time)
         {
             string[] recordString = time.ToString().Split(':');
@@ -119,30 +122,26 @@ namespace RubikCubeTimer
 
         private string ObtemRecordAtual()
         {
-            Record recordATual = new Record();
-            if (radio3x3.Checked)
-            {
-                recordATual = Record.RecuperaRecordAtual(Usuario.Id, CubeType.C3x3);
-            }
+            Record = Record.RecuperaRecordAtual(Usuario.Id, TipoCubo);
 
-            if (recordATual.Id != 0)
+            if (Record.Id != 0)
             {
-                if (recordATual.TipoCubo == CubeType.C2x2 ||
-                    recordATual.TipoCubo == CubeType.C3x3 ||
-                    recordATual.TipoCubo == CubeType.C4x4 ||
-                    recordATual.TipoCubo == CubeType.C5x5)
+                if (Record.TipoCubo == CubeType.C2x2 ||
+                    Record.TipoCubo == CubeType.C3x3 ||
+                    Record.TipoCubo == CubeType.C4x4 ||
+                    Record.TipoCubo == CubeType.C5x5)
                 {
-                    string tipoCubo = recordATual.TipoCubo.ToString().Substring(1);
+                    string tipoCubo = Record.TipoCubo.ToString().Substring(1);
 
-                    return $"Best time in {tipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", recordATual.MelhorTempo)}- " +
-                                    $"{recordATual.Data.ToString("dd/MMM/yyyy")}";
+                    return $"Best time in {tipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", Record.MelhorTempo)}- " +
+                                    $"{Record.Data.ToString("dd/MMM/yyyy")}";
                 }
                 else
                 {
-                    string tipoCubo = recordATual.TipoCubo.ToString().Substring(1);
+                    string tipoCubo = Record.TipoCubo.ToString().Substring(1);
 
-                    return $"Best time in {recordATual.TipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", recordATual.MelhorTempo)}- " +
-                                    $"{recordATual.Data.ToString("dd/MMM/yyyy")}";
+                    return $"Best time in {Record.TipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", Record.MelhorTempo)}- " +
+                                    $"{Record.Data.ToString("dd/MMM/yyyy")}";
                 }
             }
             else
@@ -161,10 +160,11 @@ namespace RubikCubeTimer
             int segundo = int.Parse(tempoVect[1]);
             int centezimo = int.Parse(tempoVect[2]);
             TimeSpan tempoTS = new TimeSpan(0, 0, minuto, segundo, centezimo);
+            //List<Record> records = new List<Record>();
 
-            List<Record> records = Record.RecuperaRecords(Usuario.Id);
+            Records = Record.RecuperaRecords(Usuario.Id, TipoCubo);
 
-            if (records.Count == 0)
+            if (Records.Count == 0)
             {
                 string mensagem = "Do you want to save your first best time?";
                 MessageBoxButtons botoes = MessageBoxButtons.YesNo;
@@ -172,22 +172,21 @@ namespace RubikCubeTimer
                 resultado = MessageBox.Show(mensagem, this.Text, botoes);
                 if (resultado == DialogResult.Yes)
                 {
-                    if (radio3x3.Checked)
-                    {
-                        retorno = Record.CreateNovoRecord(Usuario.Id, CubeType.C3x3, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
-                    }
-                    lblMelhorTempo.Text = $"Best time: {lblTimer.Text} - {DateTime.Now.ToString("dd/MMM/yyyy")}";
+                    retorno = Record.CreateNovoRecord(Usuario.Id, TipoCubo, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
+
+                    lblMelhorTempo.Text = ObtemRecordAtual();
+                    
                 }
             }
             else
             {
-                Record recordAtual = new Record();
-                if (radio3x3.Checked)
-                {
-                    recordAtual = Record.RecuperaRecordAtual(Usuario.Id, CubeType.C3x3);
-                }
+                //Record recordAtual = new Record();
+                //if (radio3x3.Checked)
+                //{
+                //    Record = Record.RecuperaRecordAtual(Usuario.Id, CubeType.C3x3);
+                //}
 
-                if (tempoTS < recordAtual.MelhorTempo)
+                if (tempoTS < Record.MelhorTempo)
                 {
                     string mensagem = "Well done! You beat your record! Do you want to save it?";
                     MessageBoxButtons botoes = MessageBoxButtons.YesNo;
@@ -195,12 +194,9 @@ namespace RubikCubeTimer
                     resultado = MessageBox.Show(mensagem, this.Text, botoes);
                     if (resultado == DialogResult.Yes)
                     {
-                        if (radio3x3.Checked)
-                        {
-                            retorno = Record.CreateNovoRecord(Usuario.Id, CubeType.C3x3, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
-                        }
+                        retorno = Record.CreateNovoRecord(Usuario.Id, TipoCubo, tempo, DateTime.Now.ToString("dd/MM/yyyy"));
 
-                        lblMelhorTempo.Text = $"Best time: {lblTimer.Text} - {DateTime.Now.ToString("dd/MMM/yyyy")}";
+                        lblMelhorTempo.Text = ObtemRecordAtual();
                     }
                 }
 
@@ -208,6 +204,10 @@ namespace RubikCubeTimer
 
             return retorno;
         }
+
+        #endregion
+
+        #region Eventos de componentes
 
         private void btnStartStop_Click(object sender, EventArgs e)
         {
@@ -253,6 +253,7 @@ namespace RubikCubeTimer
         {
             btnStartStop.Focus();
         }
+
         private void btnEditarSalvarNome_Click(object sender, EventArgs e)
         {
             if (btnEditarSalvarNome.Text == "Edit name")
@@ -292,6 +293,7 @@ namespace RubikCubeTimer
             }
 
         }
+
         private void btnAlterarSalvarSenha_Click(object sender, EventArgs e)
         {
             if (btnAlterarSalvarSenha.Text == "Change password")
@@ -400,32 +402,47 @@ namespace RubikCubeTimer
         {
             lstMyRecords.Clear();
             StartRecodList();
-            List<Record> records = Record.RecuperaRecords(Usuario.Id);
-            if (cbxCubeTypes.SelectedIndex == 1)
-            {
-                int count = 1;
+            //List<Record> records = new List<Record>();
 
-                foreach (Record record in records)
-                {
-                    string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
-                    ListViewItem recordList = lstMyRecords.Items.Add((count).ToString() + "-");
-                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, tempo.ToString()));
-                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, record.Data.ToString("dd/MM/yyyy")));
-                    count++;
-                }
+            #region Verifica qual combobox está selecionado
+            if (cbxCubeTypes.SelectedIndex == 0)
+            {
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.C2x2);
             }
-            else
+            else if (cbxCubeTypes.SelectedIndex == 1)
             {
-                int count = 1;
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.C3x3);
+            }
+            else if (cbxCubeTypes.SelectedIndex == 2)
+            {
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.C4x4);
+            }
+            else if (cbxCubeTypes.SelectedIndex == 3)
+            {
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.C5x5);
+            }
+            else if (cbxCubeTypes.SelectedIndex == 4)
+            {
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.Megaminx);
+            }
+            else if (cbxCubeTypes.SelectedIndex == 5)
+            {
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.Piraminx);
+            }
+            else if (cbxCubeTypes.SelectedIndex == 6)
+            {
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.MirrorBlocks);
+            }
+            #endregion
 
-                foreach (Record record in records)
-                {
-                    string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
-                    ListViewItem recordList = lstMyRecords.Items.Add("");
-                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, ""));
-                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, ""));
-                    count++;
-                }
+            int count = 1;
+            foreach (Record record in Records)
+            {
+                string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
+                ListViewItem recordList = lstMyRecords.Items.Add((count).ToString() + "-");
+                recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, tempo.ToString()));
+                recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, record.Data.ToString("dd/MM/yyyy")));
+                count++;
             }
         }
 
@@ -482,14 +499,61 @@ namespace RubikCubeTimer
             btnCancelDeletion.Visible = false;
         }
 
-        private void radio3x3_CheckedChanged(object sender, EventArgs e)
-        {
-            lblMelhorTempo.Text = ObtemRecordAtual();
-        }
-
         private void radio2x2_CheckedChanged(object sender, EventArgs e)
         {
-            TimerForm_Load(this, new EventArgs());
+            StartTimerList();
+            TipoCubo = CubeType.C2x2;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
         }
+
+        private void radio3x3_CheckedChanged(object sender, EventArgs e)
+        {
+            StartTimerList();
+            TipoCubo = CubeType.C3x3;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
+        }
+
+        private void radio4x4_CheckedChanged(object sender, EventArgs e)
+        {
+            StartTimerList();
+            TipoCubo = CubeType.C4x4;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
+        }
+
+        private void radio5x5_CheckedChanged(object sender, EventArgs e)
+        {
+            StartTimerList();
+            TipoCubo = CubeType.C5x5;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
+        }
+
+        private void radioMegaminx_CheckedChanged(object sender, EventArgs e)
+        {
+            StartTimerList();
+            TipoCubo = CubeType.Megaminx;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
+        }
+
+        private void radioPyraminx_CheckedChanged(object sender, EventArgs e)
+        {
+            StartTimerList();
+            TipoCubo = CubeType.Piraminx;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
+        }
+
+        private void radioMirrorBlocks_CheckedChanged(object sender, EventArgs e)
+        {
+            StartTimerList();
+            TipoCubo = CubeType.MirrorBlocks;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
+        }
+        #endregion
     }
 }

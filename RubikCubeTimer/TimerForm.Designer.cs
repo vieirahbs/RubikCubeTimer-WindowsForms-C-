@@ -57,6 +57,9 @@ namespace RubikCubeTimer
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabTimer = new System.Windows.Forms.TabPage();
             this.tabMyAccount = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCancelDeletion = new System.Windows.Forms.Button();
             this.pnlDeleteMyAccount = new System.Windows.Forms.Panel();
             this.txtDeleteAccount = new System.Windows.Forms.TextBox();
@@ -93,6 +96,8 @@ namespace RubikCubeTimer
             this.tabControl.SuspendLayout();
             this.tabTimer.SuspendLayout();
             this.tabMyAccount.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlDeleteMyAccount.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnlAlterarSenha.SuspendLayout();
@@ -197,6 +202,7 @@ namespace RubikCubeTimer
             this.radioMirrorBlocks.TabIndex = 9;
             this.radioMirrorBlocks.Text = "Mirror Blocks";
             this.radioMirrorBlocks.UseVisualStyleBackColor = true;
+            this.radioMirrorBlocks.CheckedChanged += new System.EventHandler(this.radioMirrorBlocks_CheckedChanged);
             // 
             // lblLogo
             // 
@@ -225,6 +231,7 @@ namespace RubikCubeTimer
             this.radioPyraminx.TabIndex = 8;
             this.radioPyraminx.Text = "Pyraminx";
             this.radioPyraminx.UseVisualStyleBackColor = true;
+            this.radioPyraminx.CheckedChanged += new System.EventHandler(this.radioPyraminx_CheckedChanged);
             // 
             // btmReset
             // 
@@ -258,6 +265,7 @@ namespace RubikCubeTimer
             this.radioMegaminx.TabIndex = 7;
             this.radioMegaminx.Text = "Megaminx";
             this.radioMegaminx.UseVisualStyleBackColor = true;
+            this.radioMegaminx.CheckedChanged += new System.EventHandler(this.radioMegaminx_CheckedChanged);
             // 
             // lblAvarage
             // 
@@ -286,6 +294,7 @@ namespace RubikCubeTimer
             this.radio5x5.TabIndex = 6;
             this.radio5x5.Text = "5x5";
             this.radio5x5.UseVisualStyleBackColor = true;
+            this.radio5x5.CheckedChanged += new System.EventHandler(this.radio5x5_CheckedChanged);
             // 
             // lblTimer
             // 
@@ -314,6 +323,7 @@ namespace RubikCubeTimer
             this.radio4x4.TabIndex = 5;
             this.radio4x4.Text = "4x4";
             this.radio4x4.UseVisualStyleBackColor = true;
+            this.radio4x4.CheckedChanged += new System.EventHandler(this.radio4x4_CheckedChanged);
             // 
             // radio2x2
             // 
@@ -335,7 +345,6 @@ namespace RubikCubeTimer
             // 
             this.radio3x3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radio3x3.AutoSize = true;
-            this.radio3x3.Checked = true;
             this.radio3x3.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
             this.radio3x3.FlatAppearance.BorderSize = 2;
             this.radio3x3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -344,7 +353,6 @@ namespace RubikCubeTimer
             this.radio3x3.Name = "radio3x3";
             this.radio3x3.Size = new System.Drawing.Size(65, 31);
             this.radio3x3.TabIndex = 4;
-            this.radio3x3.TabStop = true;
             this.radio3x3.Text = "3x3";
             this.radio3x3.UseVisualStyleBackColor = true;
             this.radio3x3.CheckedChanged += new System.EventHandler(this.radio3x3_CheckedChanged);
@@ -443,6 +451,7 @@ namespace RubikCubeTimer
             // 
             // tabMyAccount
             // 
+            this.tabMyAccount.Controls.Add(this.panel5);
             this.tabMyAccount.Controls.Add(this.btnCancelDeletion);
             this.tabMyAccount.Controls.Add(this.pnlDeleteMyAccount);
             this.tabMyAccount.Controls.Add(this.btnDelete);
@@ -456,6 +465,42 @@ namespace RubikCubeTimer
             this.tabMyAccount.TabIndex = 1;
             this.tabMyAccount.Text = "My account";
             this.tabMyAccount.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.BackColor = System.Drawing.Color.Transparent;
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.pictureBox1);
+            this.panel5.Location = new System.Drawing.Point(652, 6);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(637, 466);
+            this.panel5.TabIndex = 42;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.White;
+            this.label9.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label9.Location = new System.Drawing.Point(1293, 3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 35);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Nome ";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::RubikCubeTimer.Properties.Resources.RubikCubeOpacity31;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(154, 47);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(340, 340);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // btnCancelDeletion
             // 
@@ -868,7 +913,7 @@ namespace RubikCubeTimer
             listViewItem2});
             this.lstMyRecords.Location = new System.Drawing.Point(0, 49);
             this.lstMyRecords.Name = "lstMyRecords";
-            this.lstMyRecords.Size = new System.Drawing.Size(503, 529);
+            this.lstMyRecords.Size = new System.Drawing.Size(500, 524);
             this.lstMyRecords.TabIndex = 1;
             this.lstMyRecords.UseCompatibleStateImageBehavior = false;
             this.lstMyRecords.View = System.Windows.Forms.View.Details;
@@ -881,9 +926,9 @@ namespace RubikCubeTimer
             this.label6.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label6.Location = new System.Drawing.Point(73, 17);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(192, 49);
+            this.label6.Size = new System.Drawing.Size(217, 49);
             this.label6.TabIndex = 30;
-            this.label6.Text = "Cube type";
+            this.label6.Text = "Best times:";
             // 
             // TimerForm
             // 
@@ -909,6 +954,9 @@ namespace RubikCubeTimer
             this.tabTimer.PerformLayout();
             this.tabMyAccount.ResumeLayout(false);
             this.tabMyAccount.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlDeleteMyAccount.ResumeLayout(false);
             this.pnlDeleteMyAccount.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -978,5 +1026,8 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnCancelDeletion;
         private System.Windows.Forms.Panel pnlDeleteMyAccount;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
