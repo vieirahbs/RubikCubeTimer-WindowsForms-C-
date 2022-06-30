@@ -63,9 +63,59 @@ namespace RubikCubeTimer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap megaminx {
+        internal static System.Drawing.Bitmap Cubo2x2 {
             get {
-                object obj = ResourceManager.GetObject("megaminx", resourceCulture);
+                object obj = ResourceManager.GetObject("Cubo2x2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cubo4x4 {
+            get {
+                object obj = ResourceManager.GetObject("Cubo4x4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cubo5x5 {
+            get {
+                object obj = ResourceManager.GetObject("Cubo5x5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Megaminx {
+            get {
+                object obj = ResourceManager.GetObject("Megaminx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MirrorBlocks {
+            get {
+                object obj = ResourceManager.GetObject("MirrorBlocks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pyraminx {
+            get {
+                object obj = ResourceManager.GetObject("Pyraminx", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

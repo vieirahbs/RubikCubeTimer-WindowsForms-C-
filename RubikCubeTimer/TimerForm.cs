@@ -502,6 +502,7 @@ namespace RubikCubeTimer
         private void radio2x2_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.Cubo2x2;
             TipoCubo = CubeType.C2x2;
             lblMelhorTempo.Text = ObtemRecordAtual();
             btnStartStop.Focus();
@@ -510,6 +511,7 @@ namespace RubikCubeTimer
         private void radio3x3_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.RubikCube;
             TipoCubo = CubeType.C3x3;
             lblMelhorTempo.Text = ObtemRecordAtual();
             btnStartStop.Focus();
@@ -518,6 +520,7 @@ namespace RubikCubeTimer
         private void radio4x4_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.Cubo4x4;
             TipoCubo = CubeType.C4x4;
             lblMelhorTempo.Text = ObtemRecordAtual();
             btnStartStop.Focus();
@@ -526,6 +529,7 @@ namespace RubikCubeTimer
         private void radio5x5_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.Cubo5x5;
             TipoCubo = CubeType.C5x5;
             lblMelhorTempo.Text = ObtemRecordAtual();
             btnStartStop.Focus();
@@ -534,6 +538,7 @@ namespace RubikCubeTimer
         private void radioMegaminx_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.Megaminx;
             TipoCubo = CubeType.Megaminx;
             lblMelhorTempo.Text = ObtemRecordAtual();
             btnStartStop.Focus();
@@ -542,6 +547,7 @@ namespace RubikCubeTimer
         private void radioPyraminx_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.Pyraminx;
             TipoCubo = CubeType.Piraminx;
             lblMelhorTempo.Text = ObtemRecordAtual();
             btnStartStop.Focus();
@@ -550,6 +556,7 @@ namespace RubikCubeTimer
         private void radioMirrorBlocks_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.MirrorBlocks;
             TipoCubo = CubeType.MirrorBlocks;
             lblMelhorTempo.Text = ObtemRecordAtual();
             btnStartStop.Focus();
