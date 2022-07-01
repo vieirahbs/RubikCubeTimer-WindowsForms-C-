@@ -32,6 +32,7 @@ namespace RubikCubeTimer
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Times");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Times");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Times");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimerForm));
             this.lstTimes = new System.Windows.Forms.ListView();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -50,12 +51,13 @@ namespace RubikCubeTimer
             this.radio2x2 = new System.Windows.Forms.RadioButton();
             this.radio3x3 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblMelhorTempo = new System.Windows.Forms.Label();
             this.pnlRubikImage = new System.Windows.Forms.Panel();
             this.lblNome = new System.Windows.Forms.Label();
             this.pctLogo = new System.Windows.Forms.PictureBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabTimer = new System.Windows.Forms.TabPage();
+            this.lblMelhorMedia5 = new System.Windows.Forms.Label();
+            this.lblMelhorTempo = new System.Windows.Forms.Label();
             this.tabMyAccount = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
@@ -86,6 +88,10 @@ namespace RubikCubeTimer
             this.btnAlterarSalvarSenha = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tabMyRecords = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lstMedia5 = new System.Windows.Forms.ListView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cbxCubeTypes = new System.Windows.Forms.ComboBox();
             this.lstMyRecords = new System.Windows.Forms.ListView();
@@ -103,6 +109,7 @@ namespace RubikCubeTimer
             this.pnlAlterarSenha.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabMyRecords.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,7 +143,7 @@ namespace RubikCubeTimer
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogout.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.btnLogout.Location = new System.Drawing.Point(934, 354);
+            this.btnLogout.Location = new System.Drawing.Point(928, 372);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(115, 42);
             this.btnLogout.TabIndex = 7;
@@ -211,7 +218,7 @@ namespace RubikCubeTimer
             this.lblLogo.BackColor = System.Drawing.Color.Transparent;
             this.lblLogo.Font = new System.Drawing.Font("Bauhaus 93", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblLogo.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblLogo.Location = new System.Drawing.Point(211, 346);
+            this.lblLogo.Location = new System.Drawing.Point(206, 372);
             this.lblLogo.Name = "lblLogo";
             this.lblLogo.Size = new System.Drawing.Size(453, 54);
             this.lblLogo.TabIndex = 22;
@@ -369,19 +376,6 @@ namespace RubikCubeTimer
             this.label1.TabIndex = 18;
             this.label1.Text = "Times          ";
             // 
-            // lblMelhorTempo
-            // 
-            this.lblMelhorTempo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblMelhorTempo.AutoSize = true;
-            this.lblMelhorTempo.BackColor = System.Drawing.Color.Transparent;
-            this.lblMelhorTempo.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMelhorTempo.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMelhorTempo.Location = new System.Drawing.Point(6, 669);
-            this.lblMelhorTempo.Name = "lblMelhorTempo";
-            this.lblMelhorTempo.Size = new System.Drawing.Size(142, 27);
-            this.lblMelhorTempo.TabIndex = 19;
-            this.lblMelhorTempo.Text = "Melhor Tempo";
-            // 
             // pnlRubikImage
             // 
             this.pnlRubikImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -435,8 +429,9 @@ namespace RubikCubeTimer
             // 
             // tabTimer
             // 
-            this.tabTimer.Controls.Add(this.pnlRubikImage);
+            this.tabTimer.Controls.Add(this.lblMelhorMedia5);
             this.tabTimer.Controls.Add(this.lblMelhorTempo);
+            this.tabTimer.Controls.Add(this.pnlRubikImage);
             this.tabTimer.Controls.Add(this.panel1);
             this.tabTimer.Controls.Add(this.label1);
             this.tabTimer.Controls.Add(this.lstTimes);
@@ -448,6 +443,32 @@ namespace RubikCubeTimer
             this.tabTimer.TabIndex = 0;
             this.tabTimer.Text = "Timer";
             this.tabTimer.UseVisualStyleBackColor = true;
+            // 
+            // lblMelhorMedia5
+            // 
+            this.lblMelhorMedia5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblMelhorMedia5.AutoSize = true;
+            this.lblMelhorMedia5.BackColor = System.Drawing.Color.Transparent;
+            this.lblMelhorMedia5.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMelhorMedia5.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblMelhorMedia5.Location = new System.Drawing.Point(0, 609);
+            this.lblMelhorMedia5.Name = "lblMelhorMedia5";
+            this.lblMelhorMedia5.Size = new System.Drawing.Size(263, 27);
+            this.lblMelhorMedia5.TabIndex = 24;
+            this.lblMelhorMedia5.Text = "Best average of 5 in 3x3: ";
+            // 
+            // lblMelhorTempo
+            // 
+            this.lblMelhorTempo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblMelhorTempo.AutoSize = true;
+            this.lblMelhorTempo.BackColor = System.Drawing.Color.Transparent;
+            this.lblMelhorTempo.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMelhorTempo.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblMelhorTempo.Location = new System.Drawing.Point(0, 582);
+            this.lblMelhorTempo.Name = "lblMelhorTempo";
+            this.lblMelhorTempo.Size = new System.Drawing.Size(113, 27);
+            this.lblMelhorTempo.TabIndex = 23;
+            this.lblMelhorTempo.Text = "Best Time:";
             // 
             // tabMyAccount
             // 
@@ -871,6 +892,8 @@ namespace RubikCubeTimer
             // 
             // tabMyRecords
             // 
+            this.tabMyRecords.Controls.Add(this.label10);
+            this.tabMyRecords.Controls.Add(this.panel6);
             this.tabMyRecords.Controls.Add(this.panel4);
             this.tabMyRecords.Controls.Add(this.label6);
             this.tabMyRecords.Location = new System.Drawing.Point(4, 44);
@@ -880,6 +903,57 @@ namespace RubikCubeTimer
             this.tabMyRecords.TabIndex = 2;
             this.tabMyRecords.Text = "My records";
             this.tabMyRecords.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label10.Location = new System.Drawing.Point(668, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(239, 45);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "Best averages";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label11);
+            this.panel6.Controls.Add(this.lstMedia5);
+            this.panel6.Location = new System.Drawing.Point(667, 69);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(503, 529);
+            this.panel6.TabIndex = 32;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label11.Location = new System.Drawing.Point(1, 3);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(143, 35);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "(3x3 only):";
+            // 
+            // lstMedia5
+            // 
+            this.lstMedia5.BackColor = System.Drawing.Color.White;
+            this.lstMedia5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstMedia5.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lstMedia5.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lstMedia5.FullRowSelect = true;
+            this.lstMedia5.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lstMedia5.HideSelection = false;
+            this.lstMedia5.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.lstMedia5.Location = new System.Drawing.Point(1, 49);
+            this.lstMedia5.Name = "lstMedia5";
+            this.lstMedia5.Size = new System.Drawing.Size(500, 570);
+            this.lstMedia5.TabIndex = 1;
+            this.lstMedia5.UseCompatibleStateImageBehavior = false;
+            this.lstMedia5.View = System.Windows.Forms.View.Details;
             // 
             // panel4
             // 
@@ -910,7 +984,7 @@ namespace RubikCubeTimer
             this.lstMyRecords.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lstMyRecords.HideSelection = false;
             this.lstMyRecords.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem3});
             this.lstMyRecords.Location = new System.Drawing.Point(0, 49);
             this.lstMyRecords.Name = "lstMyRecords";
             this.lstMyRecords.Size = new System.Drawing.Size(500, 524);
@@ -922,11 +996,11 @@ namespace RubikCubeTimer
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label6.Location = new System.Drawing.Point(73, 17);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(217, 49);
+            this.label6.Size = new System.Drawing.Size(200, 45);
             this.label6.TabIndex = 30;
             this.label6.Text = "Best times:";
             // 
@@ -966,6 +1040,8 @@ namespace RubikCubeTimer
             this.panel2.PerformLayout();
             this.tabMyRecords.ResumeLayout(false);
             this.tabMyRecords.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -979,7 +1055,6 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.ListView lstTimes;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblMelhorTempo;
         private System.Windows.Forms.Label lblAvarage;
         private System.Windows.Forms.Panel pnlRubikImage;
         private System.Windows.Forms.PictureBox pctLogo;
@@ -1029,5 +1104,11 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.ListView lstMedia5;
+        private System.Windows.Forms.Label lblMelhorMedia5;
+        private System.Windows.Forms.Label lblMelhorTempo;
+        private System.Windows.Forms.Label label11;
     }
 }

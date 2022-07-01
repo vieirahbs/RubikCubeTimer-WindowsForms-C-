@@ -15,12 +15,18 @@ namespace RubikCubeTimer
     public partial class TimerForm : Form
     {
         public Usuario Usuario { get; set; }
-        public Record Record { get; set; }
-        public CubeType TipoCubo { get; set; }
-        public List<Record> Records { get; set; } = new List<Record>();
+        private Record Record { get; set; }
+        private CubeType TipoCubo { get; set; }
+        private List<Record> Records { get; set; } = new List<Record>();
         private TimeSpan TempoTotal { get; set; }
+        private Media5 Media5 { get; set; }
+        private List<Media5> Medias5 { get; set; } = new List<Media5>();
+        
+        
+
 
         private int Contador = 0;
+        private int ContadorMedia5 = 0;
         private Stopwatch stopwatch;
         bool isActive;
         bool isReset;
@@ -47,9 +53,11 @@ namespace RubikCubeTimer
             isReset = true;
             StartTimerList();
             Contador = 0;
+            ContadorMedia5 = 0;
             radio3x3.Checked = true;
             TempoTotal = new TimeSpan();
             lblMelhorTempo.Text = ObtemRecordAtual();
+            lblMelhorMedia5.Text = ObtemMedia5Atual();
             lblAvarage.Text = "Average: 00:00:000";
             lblTimer.Text = "00:00:000";
 
@@ -76,12 +84,15 @@ namespace RubikCubeTimer
             cbxCubeTypes.Items.Add("Megaminx");
             cbxCubeTypes.Items.Add("Piraminx");
             cbxCubeTypes.Items.Add("Mirror Blocks");
-            StartRecodList();
+            StartRecordList();
             cbxCubeTypes.SelectedIndex = 1;
+
+            StartMedia5List();
+
             #endregion
         }
 
-        #region Métodos
+        #region Métodos de Record
         private void CalculaMedia(string time)
         {
             string[] recordString = time.ToString().Split(':');
@@ -104,7 +115,7 @@ namespace RubikCubeTimer
             lstTimes.Columns.Insert(1, "", 120, HorizontalAlignment.Center);
         }
 
-        private void StartRecodList()
+        private void StartRecordList()
         {
             lstMyRecords.Clear();
             lstMyRecords.Columns.Insert(0, "", 45, HorizontalAlignment.Center);
@@ -180,12 +191,6 @@ namespace RubikCubeTimer
             }
             else
             {
-                //Record recordAtual = new Record();
-                //if (radio3x3.Checked)
-                //{
-                //    Record = Record.RecuperaRecordAtual(Usuario.Id, CubeType.C3x3);
-                //}
-
                 if (tempoTS < Record.MelhorTempo)
                 {
                     string mensagem = "Well done! You beat your record! Do you want to save it?";
@@ -203,6 +208,112 @@ namespace RubikCubeTimer
             }
 
             return retorno;
+        }
+
+        #endregion
+
+        #region Métodos de Média
+
+        private void StartMedia5List()
+        {
+            lstMedia5.Clear();
+            lstMedia5.Columns.Insert(0, "", 45, HorizontalAlignment.Center);
+            lstMedia5.Columns.Insert(1, "Time", 120, HorizontalAlignment.Center);
+            lstMedia5.Columns.Insert(2, "Date", 150, HorizontalAlignment.Center);
+
+            Medias5 = Media5.RecuperaMelhoresMedia5(Usuario.Id, CubeType.C3x3);
+            int count = 1;
+            
+            foreach (Media5 item in Medias5)
+            {
+                string media5String = string.Format("{0:mm\\:ss\\:fff} ", item.MelhorMedia);
+                
+                ListViewItem media5List = lstMedia5.Items.Add((count).ToString() + "-");
+                media5List.SubItems.Add(new ListViewItem.ListViewSubItem(null, media5String));
+                media5List.SubItems.Add(new ListViewItem.ListViewSubItem(null, item.Data.ToString("dd/MM/yyyy")));
+                count++;
+            }
+            
+
+        }
+
+        private bool VerificaMelhorMedia5(string lblMedia5)
+        {
+            bool retorno = false;
+
+            string media5 = lblMedia5.Substring(9);
+            string[] tempoVect = media5.ToString().Split(':');
+            int minuto = int.Parse(tempoVect[0]);
+            int segundo = int.Parse(tempoVect[1]);
+            int centezimo = int.Parse(tempoVect[2]);
+            TimeSpan media5TS = new TimeSpan(0, 0, minuto, segundo, centezimo);
+
+            Medias5 = Media5.RecuperaMelhoresMedia5(Usuario.Id, TipoCubo);
+
+            if (Medias5.Count == 0)
+            {
+                string mensagem = "Do you want to save your first best average of 5 in 3x3?";
+                MessageBoxButtons botoes = MessageBoxButtons.YesNo;
+                DialogResult resultado;
+                resultado = MessageBox.Show(mensagem, this.Text, botoes);
+                if (resultado == DialogResult.Yes)
+                {
+                    retorno = Media5.CreateNovaMelhorMedia5(Usuario.Id, TipoCubo, media5, DateTime.Now.ToString("dd/MM/yyyy"));
+
+                    lblMelhorMedia5.Text = ObtemMedia5Atual();
+
+                }
+            }
+            else
+            {                
+                if (media5TS < Media5.MelhorMedia)
+                {
+                    string mensagem = "Well done! You beat your average of 5 in 3x3! Do you want to save it?";
+                    MessageBoxButtons botoes = MessageBoxButtons.YesNo;
+                    DialogResult resultado;
+                    resultado = MessageBox.Show(mensagem, this.Text, botoes);
+                    if (resultado == DialogResult.Yes)
+                    {
+                        retorno = Media5.CreateNovaMelhorMedia5(Usuario.Id, TipoCubo, media5, DateTime.Now.ToString("dd/MM/yyyy"));
+
+                        lblMelhorMedia5.Text = ObtemMedia5Atual();
+                    }
+                }
+
+            }
+
+            return retorno;
+        }
+
+        private string ObtemMedia5Atual()
+        {
+            Media5 = Media5.RecuperaMedia5Atual(Usuario.Id, TipoCubo);
+
+            if (Media5.Id != 0)
+            {
+                if (Media5.TipoCubo == CubeType.C2x2 ||
+                    Media5.TipoCubo == CubeType.C3x3 ||
+                    Media5.TipoCubo == CubeType.C4x4 ||
+                    Media5.TipoCubo == CubeType.C5x5)
+                {
+                    string tipoCubo = Media5.TipoCubo.ToString().Substring(1);
+
+                    return $"Best Average of 5 in {tipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", Media5.MelhorMedia)}- " +
+                                    $"{Media5.Data.ToString("dd/MMM/yyyy")}";
+                }
+                else
+                {
+                    string tipoCubo = Media5.TipoCubo.ToString().Substring(1);
+
+                    return $"Best Average of 5 in: {Media5.TipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", Media5.MelhorMedia)}- " +
+                                    $"{Media5.Data.ToString("dd/MMM/yyyy")}";
+                }
+            }
+            else
+            {
+                return $"Best Average of 5 in 3x3: None.";
+            }
+
         }
 
         #endregion
@@ -225,6 +336,12 @@ namespace RubikCubeTimer
                 timesList.SubItems.Add(new ListViewItem.ListViewSubItem(null, lblTimer.Text));
                 VerificaRecord(lblTimer.Text);
                 CalculaMedia(lblTimer.Text);
+                ContadorMedia5++;
+                if (ContadorMedia5 == 5)
+                {
+                    VerificaMelhorMedia5(lblAvarage.Text);
+                    ContadorMedia5 = 0;
+                }
             }
             else if (isActive == false && isReset == false)
             {
@@ -401,8 +518,7 @@ namespace RubikCubeTimer
         private void cbxCubeTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             lstMyRecords.Clear();
-            StartRecodList();
-            //List<Record> records = new List<Record>();
+            StartRecordList();
 
             #region Verifica qual combobox está selecionado
             if (cbxCubeTypes.SelectedIndex == 0)

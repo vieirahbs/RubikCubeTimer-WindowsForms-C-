@@ -119,8 +119,6 @@ namespace RubikCubeTimer.Entities
             return retorno;
         }
 
-        //DESKTOP-QINDOBS RUBIKCUBE_TIMER
-
         public static bool UpdateUsuario(int id, string nome = "", string senha = "")
         {
             bool retorno = false;

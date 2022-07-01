@@ -1,26 +1,27 @@
-﻿using System;
+﻿using RubikCubeTimer.Entities.DBConnection;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using System.Windows.Forms;
-using RubikCubeTimer.Entities.DBConnection;
 
 namespace RubikCubeTimer.Entities
 {
-    public class Record
+    class Media5
     {
         public int Id { get; set; }
-        public CubeType TipoCubo {get; set;}
-        public TimeSpan MelhorTempo { get; set; }
+        public CubeType TipoCubo { get; set; }
+        public TimeSpan MelhorMedia { get; set; }
         public DateTime Data { get; set; }
 
-        public Record()
+        public Media5()
         {
         }
 
-        public static List<Record> RecuperaRecords(int id, CubeType cubeType)
+        public static List<Media5> RecuperaMelhoresMedia5(int id, CubeType tipoCubo)
         {
-            List<Record> retorno = new List<Record>();
+            List<Media5> retorno = new List<Media5>();
             try
             {
                 using (SqlConnection conexao = DBConnectionString.GetConnectionString())
@@ -29,33 +30,33 @@ namespace RubikCubeTimer.Entities
                     using (SqlCommand comando = new SqlCommand())
                     {
                         comando.Connection = conexao;
-                        comando.CommandText = "select * from RECORD " +
-                            "where ID_US = @id and TIPO_CUBO = @tipoCubo order by MELHOR_TEMPO asc";
+                        comando.CommandText = "select * from MEDIA_DE_CINCO " +
+                            "where ID_US = @id and TIPO_CUBO = @tipoCubo order by MELHOR_MEDIA asc";
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
-                        comando.Parameters.Add("@tipoCubo", SqlDbType.Int).Value = cubeType;
+                        comando.Parameters.Add("@tipoCubo", SqlDbType.Int).Value = tipoCubo;
 
                         SqlDataReader reader = comando.ExecuteReader();
 
                         while (reader.Read())
                         {
-                            string[] recordString = reader["MELHOR_TEMPO"].ToString().Split(':');
-                            int minuto = int.Parse(recordString[0]);
-                            int segundo = int.Parse(recordString[1]);
-                            int centezimo = int.Parse(recordString[2]);
-                            TimeSpan record = new TimeSpan(0, 0, minuto, segundo, centezimo);
+                            string[] media5String = reader["MELHOR_MEDIA"].ToString().Split(':');
+                            int minuto = int.Parse(media5String[0]);
+                            int segundo = int.Parse(media5String[1]);
+                            int centezimo = int.Parse(media5String[2]);
+                            TimeSpan media5 = new TimeSpan(0, 0, minuto, segundo, centezimo);
 
-                            string[] dateString = reader["DATA_REC"].ToString().Split('/');
+                            string[] dateString = reader["DATA_MEDIA5"].ToString().Split('/');
                             int day = int.Parse(dateString[0]);
                             int month = int.Parse(dateString[1]);
                             int ano = int.Parse(dateString[2]);
 
                             DateTime date = new DateTime(ano, month, day);
 
-                            retorno.Add(new Record
+                            retorno.Add(new Media5 
                             {
                                 Id = (int)reader["ID_US"],
                                 TipoCubo = (CubeType)reader["TIPO_CUBO"],
-                                MelhorTempo = record,
+                                MelhorMedia = media5,
                                 Data = date
                             });
                         }
@@ -66,13 +67,13 @@ namespace RubikCubeTimer.Entities
             catch (SqlException)
             {
                 MessageBox.Show("An error occured", "Rubik's Cube Timer");
-            }            
+            }
             return retorno;
-        }        
+        }
 
-        public static Record RecuperaRecordAtual(int id, CubeType cuboTipo)
+        public static Media5 RecuperaMedia5Atual(int id, CubeType cuboTipo)
         {
-            Record retorno = new Record();
+            Media5 retorno = new Media5();
             try
             {
                 using (SqlConnection conexao = DBConnectionString.GetConnectionString())
@@ -81,8 +82,8 @@ namespace RubikCubeTimer.Entities
                     using (SqlCommand comando = new SqlCommand())
                     {
                         comando.Connection = conexao;
-                        comando.CommandText = "select top 1 * from RECORD where ID_US = @id " +
-                            "and TIPO_CUBO = @cuboTipo order by MELHOR_TEMPO asc";
+                        comando.CommandText = "select top 1 * from MEDIA_DE_CINCO where ID_US = @id " +
+                            "and TIPO_CUBO = @cuboTipo order by MELHOR_MEDIA asc";
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
                         comando.Parameters.Add("@cuboTipo", SqlDbType.Int).Value = cuboTipo;
 
@@ -90,24 +91,24 @@ namespace RubikCubeTimer.Entities
 
                         if (reader.Read())
                         {
-                            string[] recordString = reader["MELHOR_TEMPO"].ToString().Split(':');
-                            int minuto = int.Parse(recordString[0]);
-                            int segundo = int.Parse(recordString[1]);
-                            int centezimo = int.Parse(recordString[2]);
-                            TimeSpan record = new TimeSpan(0, 0, minuto, segundo, centezimo);
+                            string[] media5String = reader["MELHOR_MEDIA"].ToString().Split(':');
+                            int minuto = int.Parse(media5String[0]);
+                            int segundo = int.Parse(media5String[1]);
+                            int centezimo = int.Parse(media5String[2]);
+                            TimeSpan media5 = new TimeSpan(0, 0, minuto, segundo, centezimo);
 
-                            string[] dateString = reader["DATA_REC"].ToString().Split('/');
+                            string[] dateString = reader["DATA_MEDIA5"].ToString().Split('/');
                             int day = int.Parse(dateString[0]);
                             int month = int.Parse(dateString[1]);
                             int ano = int.Parse(dateString[2]);
 
                             DateTime date = new DateTime(ano, month, day);
 
-                            retorno = new Record
+                            retorno = new Media5
                             {
                                 Id = (int)reader["ID_US"],
                                 TipoCubo = (CubeType)reader["TIPO_CUBO"],
-                                MelhorTempo = record,
+                                MelhorMedia = media5,
                                 Data = date
                             };
                         }
@@ -123,22 +124,22 @@ namespace RubikCubeTimer.Entities
             return retorno;
         }
 
-        public static bool CreateNovoRecord(int id, CubeType tipoCubo, string record, string data)
+        public static bool CreateNovaMelhorMedia5(int id, CubeType tipoCubo, string media5, string data)
         {
             bool retorno = false;
             try
             {
                 using (SqlConnection conexao = DBConnectionString.GetConnectionString())
                 {
-                    conexao.ConnectionString = "Data Source=DESKTOP-QINDOBS;Initial Catalog=RUBIKCUBE_TIMER;Integrated Security=True;Connect Timeout=30";
                     conexao.Open();
                     using (SqlCommand comando = new SqlCommand())
                     {
                         comando.Connection = conexao;
-                        comando.CommandText = "insert into RECORD values (@id, @tipoCubo, @record, @data)";
+                        comando.CommandText = "insert into MEDIA_DE_CINCO " +
+                            "values (@id, @tipoCubo, @media5, @data)";
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
                         comando.Parameters.Add("@tipoCubo", SqlDbType.Int).Value = tipoCubo;
-                        comando.Parameters.Add("@record", SqlDbType.VarChar).Value = record;
+                        comando.Parameters.Add("@media5", SqlDbType.VarChar).Value = media5;
                         comando.Parameters.Add("@data", SqlDbType.VarChar).Value = data;
 
                         retorno = ((int)comando.ExecuteNonQuery() > 0);
@@ -150,12 +151,8 @@ namespace RubikCubeTimer.Entities
             {
                 MessageBox.Show("An error occured", "Rubik's Cube Timer");
             }
+
             return retorno;
         }
-
     }
-
-
-
-
 }
