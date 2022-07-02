@@ -10,7 +10,8 @@ namespace RubikCubeTimer.Entities
 {
     class Media5
     {
-        public int Id { get; set; }
+        public int IdMedia { get; set; }
+        public int Id_US { get; set; }
         public CubeType TipoCubo { get; set; }
         public TimeSpan MelhorMedia { get; set; }
         public DateTime Data { get; set; }
@@ -52,9 +53,10 @@ namespace RubikCubeTimer.Entities
 
                             DateTime date = new DateTime(ano, month, day);
 
-                            retorno.Add(new Media5 
+                            retorno.Add(new Media5
                             {
-                                Id = (int)reader["ID_US"],
+                                IdMedia = (int)reader["ID_MEDIA"],
+                                Id_US = (int)reader["ID_US"],
                                 TipoCubo = (CubeType)reader["TIPO_CUBO"],
                                 MelhorMedia = media5,
                                 Data = date
@@ -106,7 +108,8 @@ namespace RubikCubeTimer.Entities
 
                             retorno = new Media5
                             {
-                                Id = (int)reader["ID_US"],
+                                IdMedia = (int)reader["ID_MEDIA"],
+                                Id_US = (int)reader["ID_US"],
                                 TipoCubo = (CubeType)reader["TIPO_CUBO"],
                                 MelhorMedia = media5,
                                 Data = date
@@ -154,5 +157,36 @@ namespace RubikCubeTimer.Entities
 
             return retorno;
         }
+
+        public static bool DeleteLastMedia5(int id, CubeType tipoCubo)
+        {
+            bool retorno = false;
+            Media5 media5 = RecuperaMedia5Atual(id, tipoCubo);
+            if (media5.Id_US != 0)
+            {
+                try
+                {
+                    using (SqlConnection conexao = DBConnectionString.GetConnectionString())
+                    {
+                        conexao.Open();
+                        using (SqlCommand comando = new SqlCommand())
+                        {
+                            comando.Connection = conexao;
+                            comando.CommandText = "delete from MEDIA_DE_CINCO where ID_MEDIA = @idMedia";
+                            comando.Parameters.Add("@idMedia", SqlDbType.Int).Value = media5.IdMedia;
+
+                            retorno = (comando.ExecuteNonQuery() > 0);
+                        }
+                        conexao.Close();
+                    }
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("An error occured", "Rubik's Cube Timer");
+                }
+            }
+            return retorno;
+        }
+
     }
 }

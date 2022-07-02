@@ -90,10 +90,12 @@ namespace RubikCubeTimer
             this.tabMyRecords = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.btnDeleteLastMedia5 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.lstMedia5 = new System.Windows.Forms.ListView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cbxCubeTypes = new System.Windows.Forms.ComboBox();
+            this.btnDeleteLastRecord = new System.Windows.Forms.Button();
             this.lstMyRecords = new System.Windows.Forms.ListView();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -425,6 +427,7 @@ namespace RubikCubeTimer
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1297, 749);
             this.tabControl.TabIndex = 22;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             this.tabControl.Click += new System.EventHandler(this.tabControl_Click);
             // 
             // tabTimer
@@ -910,35 +913,57 @@ namespace RubikCubeTimer
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label10.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label10.Location = new System.Drawing.Point(668, 17);
+            this.label10.Location = new System.Drawing.Point(755, 17);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(239, 45);
+            this.label10.Size = new System.Drawing.Size(320, 45);
             this.label10.TabIndex = 33;
-            this.label10.Text = "Best averages";
+            this.label10.Text = "Best averages of 5";
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.btnDeleteLastMedia5);
             this.panel6.Controls.Add(this.label11);
             this.panel6.Controls.Add(this.lstMedia5);
-            this.panel6.Location = new System.Drawing.Point(667, 69);
+            this.panel6.Location = new System.Drawing.Point(754, 69);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(503, 529);
             this.panel6.TabIndex = 32;
+            // 
+            // btnDeleteLastMedia5
+            // 
+            this.btnDeleteLastMedia5.BackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteLastMedia5.FlatAppearance.BorderColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteLastMedia5.FlatAppearance.BorderSize = 2;
+            this.btnDeleteLastMedia5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btnDeleteLastMedia5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MistyRose;
+            this.btnDeleteLastMedia5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteLastMedia5.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDeleteLastMedia5.ForeColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteLastMedia5.Location = new System.Drawing.Point(183, 0);
+            this.btnDeleteLastMedia5.Name = "btnDeleteLastMedia5";
+            this.btnDeleteLastMedia5.Size = new System.Drawing.Size(245, 43);
+            this.btnDeleteLastMedia5.TabIndex = 41;
+            this.btnDeleteLastMedia5.Text = "Delete last best average of 5";
+            this.btnDeleteLastMedia5.UseVisualStyleBackColor = false;
+            this.btnDeleteLastMedia5.Click += new System.EventHandler(this.btnDeleteLastMedia5_Click);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label11.Font = new System.Drawing.Font("Comic Sans MS", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label11.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label11.Location = new System.Drawing.Point(1, 3);
+            this.label11.Location = new System.Drawing.Point(3, 1);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(143, 35);
+            this.label11.Size = new System.Drawing.Size(174, 42);
             this.label11.TabIndex = 34;
             this.label11.Text = "(3x3 only):";
             // 
             // lstMedia5
             // 
+            this.lstMedia5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lstMedia5.BackColor = System.Drawing.Color.White;
             this.lstMedia5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstMedia5.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -958,10 +983,11 @@ namespace RubikCubeTimer
             // panel4
             // 
             this.panel4.Controls.Add(this.cbxCubeTypes);
+            this.panel4.Controls.Add(this.btnDeleteLastRecord);
             this.panel4.Controls.Add(this.lstMyRecords);
             this.panel4.Location = new System.Drawing.Point(73, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(503, 529);
+            this.panel4.Size = new System.Drawing.Size(636, 529);
             this.panel4.TabIndex = 31;
             // 
             // cbxCubeTypes
@@ -973,6 +999,24 @@ namespace RubikCubeTimer
             this.cbxCubeTypes.Size = new System.Drawing.Size(316, 43);
             this.cbxCubeTypes.TabIndex = 2;
             this.cbxCubeTypes.SelectedIndexChanged += new System.EventHandler(this.cbxCubeTypes_SelectedIndexChanged);
+            // 
+            // btnDeleteLastRecord
+            // 
+            this.btnDeleteLastRecord.BackColor = System.Drawing.Color.White;
+            this.btnDeleteLastRecord.FlatAppearance.BorderColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteLastRecord.FlatAppearance.BorderSize = 2;
+            this.btnDeleteLastRecord.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btnDeleteLastRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MistyRose;
+            this.btnDeleteLastRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteLastRecord.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDeleteLastRecord.ForeColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteLastRecord.Location = new System.Drawing.Point(322, 0);
+            this.btnDeleteLastRecord.Name = "btnDeleteLastRecord";
+            this.btnDeleteLastRecord.Size = new System.Drawing.Size(264, 43);
+            this.btnDeleteLastRecord.TabIndex = 37;
+            this.btnDeleteLastRecord.Text = "Delete last Mirror Blocks record";
+            this.btnDeleteLastRecord.UseVisualStyleBackColor = false;
+            this.btnDeleteLastRecord.Click += new System.EventHandler(this.btnDeleteLastRecord_Click);
             // 
             // lstMyRecords
             // 
@@ -1110,5 +1154,7 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Label lblMelhorMedia5;
         private System.Windows.Forms.Label lblMelhorTempo;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnDeleteLastRecord;
+        private System.Windows.Forms.Button btnDeleteLastMedia5;
     }
 }

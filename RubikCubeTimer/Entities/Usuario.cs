@@ -171,6 +171,7 @@ namespace RubikCubeTimer.Entities
                         {
                             comando.Connection = conexao;
                             comando.CommandText = "delete from RECORD where ID_US = @id; " +
+                                "delete from MEDIA_DE_CINCO where ID_US = @id; " +
                                 "delete from USUARIO where ID_US = @id";
                             comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
                             retorno = (comando.ExecuteNonQuery() > 0);

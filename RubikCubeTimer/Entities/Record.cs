@@ -9,8 +9,9 @@ namespace RubikCubeTimer.Entities
 {
     public class Record
     {
-        public int Id { get; set; }
-        public CubeType TipoCubo {get; set;}
+        public int Id_Rec { get; set; }
+        public int Id_US { get; set; }
+        public CubeType TipoCubo { get; set; }
         public TimeSpan MelhorTempo { get; set; }
         public DateTime Data { get; set; }
 
@@ -53,7 +54,8 @@ namespace RubikCubeTimer.Entities
 
                             retorno.Add(new Record
                             {
-                                Id = (int)reader["ID_US"],
+                                Id_Rec = (int)reader["ID_REC"],
+                                Id_US = (int)reader["ID_US"],
                                 TipoCubo = (CubeType)reader["TIPO_CUBO"],
                                 MelhorTempo = record,
                                 Data = date
@@ -66,9 +68,9 @@ namespace RubikCubeTimer.Entities
             catch (SqlException)
             {
                 MessageBox.Show("An error occured", "Rubik's Cube Timer");
-            }            
+            }
             return retorno;
-        }        
+        }
 
         public static Record RecuperaRecordAtual(int id, CubeType cuboTipo)
         {
@@ -105,7 +107,8 @@ namespace RubikCubeTimer.Entities
 
                             retorno = new Record
                             {
-                                Id = (int)reader["ID_US"],
+                                Id_Rec = (int)reader["ID_REC"],
+                                Id_US = (int)reader["ID_US"],
                                 TipoCubo = (CubeType)reader["TIPO_CUBO"],
                                 MelhorTempo = record,
                                 Data = date
@@ -149,6 +152,37 @@ namespace RubikCubeTimer.Entities
             catch (SqlException)
             {
                 MessageBox.Show("An error occured", "Rubik's Cube Timer");
+            }
+            return retorno;
+        }
+
+        public static bool DeleteLastRecord(int id, CubeType tipoCubo)
+        {
+            bool retorno = false;
+            Record record = RecuperaRecordAtual(id, tipoCubo);
+
+            if (record.Id_US != 0)
+            {
+                try
+                {
+                    using (SqlConnection conexao = DBConnectionString.GetConnectionString())
+                    {
+                        conexao.Open();
+                        using (SqlCommand comando = new SqlCommand())
+                        {
+                            comando.Connection = conexao;
+                            comando.CommandText = "delete from RECORD where ID_REC = @idRec";
+                            comando.Parameters.Add("@idRec", SqlDbType.Int).Value = record.Id_Rec;
+
+                            retorno = (comando.ExecuteNonQuery() > 0);
+                        }
+                        conexao.Close();
+                    }
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("An error occured", "Rubik's Cube Timer");
+                }
             }
             return retorno;
         }
