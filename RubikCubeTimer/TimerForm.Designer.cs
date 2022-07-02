@@ -88,6 +88,7 @@ namespace RubikCubeTimer
             this.btnAlterarSalvarSenha = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tabMyRecords = new System.Windows.Forms.TabPage();
+            this.btnExportar = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnDeleteLastMedia5 = new System.Windows.Forms.Button();
@@ -895,6 +896,7 @@ namespace RubikCubeTimer
             // 
             // tabMyRecords
             // 
+            this.tabMyRecords.Controls.Add(this.btnExportar);
             this.tabMyRecords.Controls.Add(this.label10);
             this.tabMyRecords.Controls.Add(this.panel6);
             this.tabMyRecords.Controls.Add(this.panel4);
@@ -906,6 +908,21 @@ namespace RubikCubeTimer
             this.tabMyRecords.TabIndex = 2;
             this.tabMyRecords.Text = "My records";
             this.tabMyRecords.UseVisualStyleBackColor = true;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnExportar.FlatAppearance.BorderSize = 0;
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnExportar.ForeColor = System.Drawing.Color.White;
+            this.btnExportar.Location = new System.Drawing.Point(1140, 635);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(117, 37);
+            this.btnExportar.TabIndex = 42;
+            this.btnExportar.Text = "Export";
+            this.btnExportar.UseVisualStyleBackColor = false;
             // 
             // label10
             // 
@@ -975,7 +992,7 @@ namespace RubikCubeTimer
             listViewItem2});
             this.lstMedia5.Location = new System.Drawing.Point(1, 49);
             this.lstMedia5.Name = "lstMedia5";
-            this.lstMedia5.Size = new System.Drawing.Size(500, 570);
+            this.lstMedia5.Size = new System.Drawing.Size(500, 480);
             this.lstMedia5.TabIndex = 1;
             this.lstMedia5.UseCompatibleStateImageBehavior = false;
             this.lstMedia5.View = System.Windows.Forms.View.Details;
@@ -1156,5 +1173,6 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnDeleteLastRecord;
         private System.Windows.Forms.Button btnDeleteLastMedia5;
+        private System.Windows.Forms.Button btnExportar;
     }
 }

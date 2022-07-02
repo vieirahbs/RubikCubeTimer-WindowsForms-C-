@@ -52,14 +52,13 @@ namespace RubikCubeTimer
             isActive = false;
             isReset = true;
             StartTimerList();
+            radio3x3.Checked = true;
             Contador = 0;
             ContadorMedia5 = 0;
-            radio3x3.Checked = true;
             TempoTotal = new TimeSpan();
             lblMelhorTempo.Text = ObtemRecordAtual();
             lblMelhorMedia5.Text = ObtemMedia5Atual();
-            lblAvarage.Text = "Average: 00:00:000";
-            lblTimer.Text = "00:00:000";
+            SetAverageAndTimerText();
 
             #endregion
 
@@ -84,6 +83,7 @@ namespace RubikCubeTimer
             cbxCubeTypes.Items.Add("Megaminx");
             cbxCubeTypes.Items.Add("Piraminx");
             cbxCubeTypes.Items.Add("Mirror Blocks");
+            cbxCubeTypes.SelectedIndex = -1;
 
             StartRecordList();
             StartMedia5List();
@@ -91,6 +91,17 @@ namespace RubikCubeTimer
         }
 
         #region Métodos de Record
+
+        private void SetAverageAndTimerText()
+        {
+            lblAvarage.Text = "Average: 00:00:000";
+            lblTimer.Text = "00:00:000";
+        }
+
+        private void SetTempoTotal()
+        {
+            TempoTotal = new TimeSpan(0, 0, 0, 0, 0);
+        }
         private void CalculaMedia(string time)
         {
             string[] recordString = time.ToString().Split(':');
@@ -119,6 +130,23 @@ namespace RubikCubeTimer
             lstMyRecords.Columns.Insert(0, "", 45, HorizontalAlignment.Center);
             lstMyRecords.Columns.Insert(1, "Time", 120, HorizontalAlignment.Center);
             lstMyRecords.Columns.Insert(2, "Date", 150, HorizontalAlignment.Center);
+        }
+
+        private void FillReacordList(int index)
+        {
+            StartRecordList();
+            int count = 1;
+            Records = Record.RecuperaRecords(Usuario.Id, Record.TipoCubo);
+            foreach (Record record in Records)
+            {
+
+                string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
+                ListViewItem recordList = lstMyRecords.Items.Add((count).ToString() + "-");
+                recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, tempo.ToString()));
+                recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, record.Data.ToString("dd/MM/yyyy")));
+                count++;
+
+            }
         }
 
         private void timerRubik_Tick(object sender, EventArgs e)
@@ -428,7 +456,8 @@ namespace RubikCubeTimer
 
         private void btmReset_Click(object sender, EventArgs e)
         {
-            TimerForm_Load(this, new EventArgs());
+            SetTempoTotal();
+            SetAverageAndTimerText();
         }
 
         private void tabControl_Click(object sender, EventArgs e)
@@ -590,9 +619,9 @@ namespace RubikCubeTimer
             if (cbxCubeTypes.SelectedIndex == 0)
             {
                 Records = Record.RecuperaRecords(Usuario.Id, CubeType.C2x2);
-
                 if (Records.Count != 0)
                 {
+                    Record.TipoCubo = Records[0].TipoCubo;
                     tipoCubo = CubeType.C2x2.ToString().Substring(1);
                     btnDeleteLastRecord.Visible = true;
                     btnDeleteLastRecord.Text = $"Delete last {tipoCubo} record";
@@ -607,6 +636,7 @@ namespace RubikCubeTimer
                 Records = Record.RecuperaRecords(Usuario.Id, CubeType.C3x3);
                 if (Records.Count != 0)
                 {
+                    Record.TipoCubo = Records[0].TipoCubo;
                     tipoCubo = CubeType.C3x3.ToString().Substring(1);
                     btnDeleteLastRecord.Visible = true;
                     btnDeleteLastRecord.Text = $"Delete last {tipoCubo} record";
@@ -621,6 +651,7 @@ namespace RubikCubeTimer
                 Records = Record.RecuperaRecords(Usuario.Id, CubeType.C4x4);
                 if (Records.Count != 0)
                 {
+                    Record.TipoCubo = Records[0].TipoCubo;
                     tipoCubo = CubeType.C4x4.ToString().Substring(1);
                     btnDeleteLastRecord.Visible = true;
                     btnDeleteLastRecord.Text = $"Delete last {tipoCubo} record";
@@ -635,6 +666,7 @@ namespace RubikCubeTimer
                 Records = Record.RecuperaRecords(Usuario.Id, CubeType.C5x5);
                 if (Records.Count != 0)
                 {
+                    Record.TipoCubo = Records[0].TipoCubo;
                     tipoCubo = CubeType.C5x5.ToString().Substring(1);
                     btnDeleteLastRecord.Visible = true;
                     btnDeleteLastRecord.Text = $"Delete last {tipoCubo} record";
@@ -649,6 +681,7 @@ namespace RubikCubeTimer
                 Records = Record.RecuperaRecords(Usuario.Id, CubeType.Megaminx);
                 if (Records.Count != 0)
                 {
+                    Record.TipoCubo = Records[0].TipoCubo;
                     tipoCubo = CubeType.Megaminx.ToString();
                     btnDeleteLastRecord.Visible = true;
                     btnDeleteLastRecord.Text = $"Delete last {tipoCubo} record";
@@ -663,6 +696,7 @@ namespace RubikCubeTimer
                 Records = Record.RecuperaRecords(Usuario.Id, CubeType.Piraminx);
                 if (Records.Count != 0)
                 {
+                    Record.TipoCubo = Records[0].TipoCubo;
                     tipoCubo = CubeType.Piraminx.ToString();
                     btnDeleteLastRecord.Visible = true;
                     btnDeleteLastRecord.Text = $"Delete {tipoCubo} last record";
@@ -677,6 +711,7 @@ namespace RubikCubeTimer
                 Records = Record.RecuperaRecords(Usuario.Id, CubeType.MirrorBlocks);
                 if (Records.Count != 0)
                 {
+                    Record.TipoCubo = Records[0].TipoCubo;
                     btnDeleteLastRecord.Visible = true;
                     btnDeleteLastRecord.Text = $"Delete Mirror Blocks last record";
                 }
@@ -757,10 +792,10 @@ namespace RubikCubeTimer
         private void btnCancelDeletion_Click(object sender, EventArgs e)
         {
             btnDelete.Text = "Delete my account";
+            txtDeleteAccount.Text = string.Empty;
             pnlDeleteMyAccount.Visible = false;
             btnCancelDeletion.Visible = false;
         }
-
         private void radio2x2_CheckedChanged(object sender, EventArgs e)
         {
             StartTimerList();
@@ -770,6 +805,9 @@ namespace RubikCubeTimer
             btnStartStop.Focus();
             ContadorMedia5 = 0;
             Contador = 0;
+            Record.TipoCubo = CubeType.C2x2;
+            SetAverageAndTimerText();
+            SetTempoTotal();
         }
 
         private void radio3x3_CheckedChanged(object sender, EventArgs e)
@@ -781,6 +819,9 @@ namespace RubikCubeTimer
             btnStartStop.Focus();
             ContadorMedia5 = 0;
             Contador = 0;
+            Record.TipoCubo = CubeType.C3x3;
+            SetAverageAndTimerText();
+            SetTempoTotal();
         }
 
         private void radio4x4_CheckedChanged(object sender, EventArgs e)
@@ -792,6 +833,9 @@ namespace RubikCubeTimer
             btnStartStop.Focus();
             ContadorMedia5 = 0;
             Contador = 0;
+            Record.TipoCubo = CubeType.C4x4;
+            SetAverageAndTimerText();
+            SetTempoTotal();
         }
 
         private void radio5x5_CheckedChanged(object sender, EventArgs e)
@@ -803,6 +847,9 @@ namespace RubikCubeTimer
             btnStartStop.Focus();
             ContadorMedia5 = 0;
             Contador = 0;
+            Record.TipoCubo = CubeType.C5x5;
+            SetAverageAndTimerText();
+            SetTempoTotal();
         }
 
         private void radioMegaminx_CheckedChanged(object sender, EventArgs e)
@@ -814,6 +861,9 @@ namespace RubikCubeTimer
             btnStartStop.Focus();
             ContadorMedia5 = 0;
             Contador = 0;
+            Record.TipoCubo = CubeType.Megaminx;
+            SetAverageAndTimerText();
+            SetTempoTotal();
         }
 
         private void radioPyraminx_CheckedChanged(object sender, EventArgs e)
@@ -825,6 +875,9 @@ namespace RubikCubeTimer
             btnStartStop.Focus();
             ContadorMedia5 = 0;
             Contador = 0;
+            Record.TipoCubo = CubeType.Piraminx;
+            SetAverageAndTimerText();
+            SetTempoTotal();
         }
 
         private void radioMirrorBlocks_CheckedChanged(object sender, EventArgs e)
@@ -836,12 +889,18 @@ namespace RubikCubeTimer
             btnStartStop.Focus();
             ContadorMedia5 = 0;
             Contador = 0;
+            Record.TipoCubo = CubeType.MirrorBlocks;
+            SetAverageAndTimerText();
+            SetTempoTotal();
         }
         #endregion
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbxCubeTypes.SelectedIndex = -1;
+            int index = (int)Record.TipoCubo - 2;
+            FillReacordList(index);
+            cbxCubeTypes.SelectedIndex = index;
+            StartMedia5List();
         }
 
         private void btnDeleteLastRecord_Click(object sender, EventArgs e)
@@ -857,7 +916,8 @@ namespace RubikCubeTimer
                 if (lastRecordDeleted)
                 {
                     resultado = MessageBox.Show($"Last record in {tipoCubo} deleted successfully!", this.Text);
-                    TimerForm_Load(this, new EventArgs());
+                    int index = (int)Record.TipoCubo - 2;
+                    FillReacordList(index);
                 }
             }
         }
