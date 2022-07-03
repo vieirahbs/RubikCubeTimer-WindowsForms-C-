@@ -33,6 +33,7 @@ namespace RubikCubeTimer
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Times");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Times");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Times");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Times");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimerForm));
             this.lstTimes = new System.Windows.Forms.ListView();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -59,6 +60,7 @@ namespace RubikCubeTimer
             this.lblMelhorMedia5 = new System.Windows.Forms.Label();
             this.lblMelhorTempo = new System.Windows.Forms.Label();
             this.tabMyAccount = new System.Windows.Forms.TabPage();
+            this.lstRelatorio = new System.Windows.Forms.ListView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -476,6 +478,7 @@ namespace RubikCubeTimer
             // 
             // tabMyAccount
             // 
+            this.tabMyAccount.Controls.Add(this.lstRelatorio);
             this.tabMyAccount.Controls.Add(this.panel5);
             this.tabMyAccount.Controls.Add(this.btnCancelDeletion);
             this.tabMyAccount.Controls.Add(this.pnlDeleteMyAccount);
@@ -490,6 +493,26 @@ namespace RubikCubeTimer
             this.tabMyAccount.TabIndex = 1;
             this.tabMyAccount.Text = "My account";
             this.tabMyAccount.UseVisualStyleBackColor = true;
+            // 
+            // lstRelatorio
+            // 
+            this.lstRelatorio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstRelatorio.BackColor = System.Drawing.Color.White;
+            this.lstRelatorio.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstRelatorio.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lstRelatorio.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lstRelatorio.FullRowSelect = true;
+            this.lstRelatorio.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lstRelatorio.HideSelection = false;
+            this.lstRelatorio.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.lstRelatorio.Location = new System.Drawing.Point(670, 536);
+            this.lstRelatorio.Name = "lstRelatorio";
+            this.lstRelatorio.Size = new System.Drawing.Size(115, 107);
+            this.lstRelatorio.TabIndex = 43;
+            this.lstRelatorio.UseCompatibleStateImageBehavior = false;
+            this.lstRelatorio.View = System.Windows.Forms.View.Details;
+            this.lstRelatorio.Visible = false;
             // 
             // panel5
             // 
@@ -923,6 +946,7 @@ namespace RubikCubeTimer
             this.btnExportar.TabIndex = 42;
             this.btnExportar.Text = "Export";
             this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // label10
             // 
@@ -989,7 +1013,7 @@ namespace RubikCubeTimer
             this.lstMedia5.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lstMedia5.HideSelection = false;
             this.lstMedia5.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem3});
             this.lstMedia5.Location = new System.Drawing.Point(1, 49);
             this.lstMedia5.Name = "lstMedia5";
             this.lstMedia5.Size = new System.Drawing.Size(500, 480);
@@ -1045,7 +1069,7 @@ namespace RubikCubeTimer
             this.lstMyRecords.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lstMyRecords.HideSelection = false;
             this.lstMyRecords.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem4});
             this.lstMyRecords.Location = new System.Drawing.Point(0, 49);
             this.lstMyRecords.Name = "lstMyRecords";
             this.lstMyRecords.Size = new System.Drawing.Size(500, 524);
@@ -1174,5 +1198,6 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Button btnDeleteLastRecord;
         private System.Windows.Forms.Button btnDeleteLastMedia5;
         private System.Windows.Forms.Button btnExportar;
+        private System.Windows.Forms.ListView lstRelatorio;
     }
 }

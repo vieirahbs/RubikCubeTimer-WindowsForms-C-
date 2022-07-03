@@ -137,16 +137,27 @@ namespace RubikCubeTimer
             StartRecordList();
             int count = 1;
             Records = Record.RecuperaRecords(Usuario.Id, Record.TipoCubo);
-            foreach (Record record in Records)
+            if (Records.Count > 0)
             {
+                btnDeleteLastRecord.Visible = true;
+                foreach (Record record in Records)
+                {
 
-                string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
-                ListViewItem recordList = lstMyRecords.Items.Add((count).ToString() + "-");
-                recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, tempo.ToString()));
-                recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, record.Data.ToString("dd/MM/yyyy")));
-                count++;
+                    string tempo = string.Format("{0:mm\\:ss\\:fff}", record.MelhorTempo);
+                    ListViewItem recordList = lstMyRecords.Items.Add((count).ToString() + "-");
+                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, tempo.ToString()));
+                    recordList.SubItems.Add(new ListViewItem.ListViewSubItem(null, record.Data.ToString("dd/MM/yyyy")));
+                    count++;
 
+                }
             }
+            else
+            {
+                btnDeleteLastRecord.Visible = false;
+                SetAverageAndTimerText();
+                StartTimerList();
+            }
+
         }
 
         private void timerRubik_Tick(object sender, EventArgs e)
@@ -458,6 +469,7 @@ namespace RubikCubeTimer
         {
             SetTempoTotal();
             SetAverageAndTimerText();
+            isActive = false;
         }
 
         private void tabControl_Click(object sender, EventArgs e)
@@ -720,7 +732,7 @@ namespace RubikCubeTimer
                     btnDeleteLastRecord.Visible = false;
                 }
             }
-            #endregion           
+            #endregion
 
             if (Records.Count != 0)
             {
@@ -934,6 +946,11 @@ namespace RubikCubeTimer
                 resultado = MessageBox.Show($"Last best average deleted successfully!", this.Text);
                 StartMedia5List();
             }
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            Relatorio.ExportReport(Usuario);
         }
     }
 }
