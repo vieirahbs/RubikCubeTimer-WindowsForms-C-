@@ -132,7 +132,7 @@ namespace RubikCubeTimer
             lstMyRecords.Columns.Insert(2, "Date", 150, HorizontalAlignment.Center);
         }
 
-        private void FillReacordList(int index)
+        private void FillRecordList(int index)
         {
             StartRecordList();
             int count = 1;
@@ -467,6 +467,7 @@ namespace RubikCubeTimer
 
         private void btmReset_Click(object sender, EventArgs e)
         {
+            StartTimerList();
             SetTempoTotal();
             SetAverageAndTimerText();
             isActive = false;
@@ -910,8 +911,15 @@ namespace RubikCubeTimer
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = (int)Record.TipoCubo - 2;
-            FillReacordList(index);
-            cbxCubeTypes.SelectedIndex = index;
+            FillRecordList(index);
+            if (index >= 0)
+            {
+                cbxCubeTypes.SelectedIndex = index;
+            }
+            else
+            {
+                cbxCubeTypes.SelectedIndex = -1;
+            }
             StartMedia5List();
         }
 
@@ -929,7 +937,7 @@ namespace RubikCubeTimer
                 {
                     resultado = MessageBox.Show($"Last record in {tipoCubo} deleted successfully!", this.Text);
                     int index = (int)Record.TipoCubo - 2;
-                    FillReacordList(index);
+                    FillRecordList(index);
                 }
             }
         }

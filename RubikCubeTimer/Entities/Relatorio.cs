@@ -21,7 +21,7 @@ namespace RubikCubeTimer.Entities
             XLWorkbook wb = new XLWorkbook();
 
             IXLWorksheet records = wb.Worksheets.Add("My best times");
-            IXLWorksheet averages = wb.Worksheets.Add("My best averages");
+            IXLWorksheet averages = wb.Worksheets.Add("My best averages of 5");
 
             #region Preenche a aba "My information"
             IXLWorksheet myInfo = wb.Worksheets.Add("My information");
@@ -120,18 +120,18 @@ namespace RubikCubeTimer.Entities
             #region Configura Worksheet averages
             averages.Column(1).Width = 1;
             averages.Column(2).Width = 12;
-            averages.Column(3).Width = 18;
+            averages.Column(3).Width = 22;
             averages.Column(4).Width = 14;
             averages.SheetView.Worksheet.ShowGridLines = false;
             averages.Range("B1:D1").Merge();
-            averages.Cell(1, 2).Value = "MY BEST TIMES";
+            averages.Cell(1, 2).Value = "MY BEST AVERAGES OF 5";
             averages.Cell(1, 2).Style.Font.Bold = true;
             averages.Cell(1, 2).Style.Font.FontSize = 24;
             averages.Cell(1, 2).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
             //Header
             averages.Cell(2, 2).Value = "CUBE TYPE";
-            averages.Cell(2, 3).Value = "BEST AVERAGES";
+            averages.Cell(2, 3).Value = "BEST AVERAGES OF 5";
             averages.Cell(2, 4).Value = "DATE";
             averages.Range("B2:D2").Style.Fill.BackgroundColor = XLColor.SmaltDarkPowderBlue;
             averages.Range("B2:D2").Style.Font.Bold = true;
