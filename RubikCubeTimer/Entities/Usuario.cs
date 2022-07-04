@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 using System.Windows.Forms;
-using RubikCubeTimer.Entities;
 using RubikCubeTimer.Entities.DBConnection;
 using RubikCubeTimer.Entities.Helpers;
 

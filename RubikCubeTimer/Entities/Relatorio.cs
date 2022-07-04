@@ -1,11 +1,8 @@
 ﻿using ClosedXML.Excel;
 using RubikCubeTimer.Entities.DBConnection;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RubikCubeTimer.Entities

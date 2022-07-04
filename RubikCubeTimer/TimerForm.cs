@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Timers;
 using System.Windows.Forms;
 using System.Diagnostics;
 using RubikCubeTimer.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace RubikCubeTimer
 {
@@ -458,6 +453,11 @@ namespace RubikCubeTimer
             }
         }
 
+        private void lstTimes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnStartStop.Focus();
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             MenuForm menuForm = new MenuForm();
@@ -471,6 +471,9 @@ namespace RubikCubeTimer
             SetTempoTotal();
             SetAverageAndTimerText();
             isActive = false;
+            Contador = 0;
+            ContadorMedia5 = 0;
+            btnStartStop.Focus();
         }
 
         private void tabControl_Click(object sender, EventArgs e)
@@ -906,7 +909,6 @@ namespace RubikCubeTimer
             SetAverageAndTimerText();
             SetTempoTotal();
         }
-        #endregion
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -960,5 +962,8 @@ namespace RubikCubeTimer
         {
             Relatorio.ExportReport(Usuario);
         }
+        #endregion
+
+
     }
 }

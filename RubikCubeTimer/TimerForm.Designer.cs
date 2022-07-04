@@ -137,6 +137,7 @@ namespace RubikCubeTimer
             this.lstTimes.TabIndex = 0;
             this.lstTimes.UseCompatibleStateImageBehavior = false;
             this.lstTimes.View = System.Windows.Forms.View.Details;
+            this.lstTimes.SelectedIndexChanged += new System.EventHandler(this.lstTimes_SelectedIndexChanged);
             // 
             // btnLogout
             // 

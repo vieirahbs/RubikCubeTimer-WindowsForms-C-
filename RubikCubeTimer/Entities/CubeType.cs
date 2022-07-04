@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RubikCubeTimer.Entities
+﻿namespace RubikCubeTimer.Entities
 {
     public enum CubeType : int
     {
