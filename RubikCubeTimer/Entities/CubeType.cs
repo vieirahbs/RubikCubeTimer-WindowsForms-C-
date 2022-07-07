@@ -8,6 +8,7 @@
         C5x5 = 5,
         Megaminx = 6,
         Piraminx = 7,
-        MirrorBlocks = 8
+        MirrorBlocks = 8,
+        All = 9
     }
 }

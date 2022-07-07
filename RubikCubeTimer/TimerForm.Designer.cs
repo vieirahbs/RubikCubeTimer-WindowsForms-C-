@@ -40,6 +40,7 @@ namespace RubikCubeTimer
             this.timerRubik = new System.Windows.Forms.Timer(this.components);
             this.btnStartStop = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.radioAll = new System.Windows.Forms.RadioButton();
             this.radioMirrorBlocks = new System.Windows.Forms.RadioButton();
             this.lblLogo = new System.Windows.Forms.Label();
             this.radioPyraminx = new System.Windows.Forms.RadioButton();
@@ -183,6 +184,7 @@ namespace RubikCubeTimer
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.radioAll);
             this.panel1.Controls.Add(this.radioMirrorBlocks);
             this.panel1.Controls.Add(this.lblLogo);
             this.panel1.Controls.Add(this.radioPyraminx);
@@ -201,6 +203,22 @@ namespace RubikCubeTimer
             this.panel1.Size = new System.Drawing.Size(1082, 427);
             this.panel1.TabIndex = 15;
             // 
+            // radioAll
+            // 
+            this.radioAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.radioAll.AutoSize = true;
+            this.radioAll.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.radioAll.FlatAppearance.BorderSize = 2;
+            this.radioAll.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.radioAll.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.radioAll.Location = new System.Drawing.Point(738, 3);
+            this.radioAll.Name = "radioAll";
+            this.radioAll.Size = new System.Drawing.Size(54, 31);
+            this.radioAll.TabIndex = 23;
+            this.radioAll.Text = "All";
+            this.radioAll.UseVisualStyleBackColor = true;
+            this.radioAll.CheckedChanged += new System.EventHandler(this.radioAll_CheckedChanged);
+            // 
             // radioMirrorBlocks
             // 
             this.radioMirrorBlocks.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -209,7 +227,7 @@ namespace RubikCubeTimer
             this.radioMirrorBlocks.FlatAppearance.BorderSize = 2;
             this.radioMirrorBlocks.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radioMirrorBlocks.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radioMirrorBlocks.Location = new System.Drawing.Point(627, 11);
+            this.radioMirrorBlocks.Location = new System.Drawing.Point(579, 3);
             this.radioMirrorBlocks.Name = "radioMirrorBlocks";
             this.radioMirrorBlocks.Size = new System.Drawing.Size(153, 31);
             this.radioMirrorBlocks.TabIndex = 9;
@@ -238,7 +256,7 @@ namespace RubikCubeTimer
             this.radioPyraminx.FlatAppearance.BorderSize = 2;
             this.radioPyraminx.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radioPyraminx.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radioPyraminx.Location = new System.Drawing.Point(509, 11);
+            this.radioPyraminx.Location = new System.Drawing.Point(461, 3);
             this.radioPyraminx.Name = "radioPyraminx";
             this.radioPyraminx.Size = new System.Drawing.Size(112, 31);
             this.radioPyraminx.TabIndex = 8;
@@ -272,7 +290,7 @@ namespace RubikCubeTimer
             this.radioMegaminx.FlatAppearance.BorderSize = 2;
             this.radioMegaminx.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radioMegaminx.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radioMegaminx.Location = new System.Drawing.Point(383, 11);
+            this.radioMegaminx.Location = new System.Drawing.Point(335, 3);
             this.radioMegaminx.Name = "radioMegaminx";
             this.radioMegaminx.Size = new System.Drawing.Size(120, 31);
             this.radioMegaminx.TabIndex = 7;
@@ -301,7 +319,7 @@ namespace RubikCubeTimer
             this.radio5x5.FlatAppearance.BorderSize = 2;
             this.radio5x5.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radio5x5.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radio5x5.Location = new System.Drawing.Point(310, 11);
+            this.radio5x5.Location = new System.Drawing.Point(262, 3);
             this.radio5x5.Name = "radio5x5";
             this.radio5x5.Size = new System.Drawing.Size(65, 31);
             this.radio5x5.TabIndex = 6;
@@ -330,7 +348,7 @@ namespace RubikCubeTimer
             this.radio4x4.FlatAppearance.BorderSize = 2;
             this.radio4x4.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radio4x4.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radio4x4.Location = new System.Drawing.Point(241, 11);
+            this.radio4x4.Location = new System.Drawing.Point(193, 3);
             this.radio4x4.Name = "radio4x4";
             this.radio4x4.Size = new System.Drawing.Size(65, 31);
             this.radio4x4.TabIndex = 5;
@@ -346,7 +364,7 @@ namespace RubikCubeTimer
             this.radio2x2.FlatAppearance.BorderSize = 2;
             this.radio2x2.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radio2x2.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radio2x2.Location = new System.Drawing.Point(99, 11);
+            this.radio2x2.Location = new System.Drawing.Point(51, 3);
             this.radio2x2.Name = "radio2x2";
             this.radio2x2.Size = new System.Drawing.Size(65, 31);
             this.radio2x2.TabIndex = 3;
@@ -362,7 +380,7 @@ namespace RubikCubeTimer
             this.radio3x3.FlatAppearance.BorderSize = 2;
             this.radio3x3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radio3x3.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radio3x3.Location = new System.Drawing.Point(170, 11);
+            this.radio3x3.Location = new System.Drawing.Point(122, 3);
             this.radio3x3.Name = "radio3x3";
             this.radio3x3.Size = new System.Drawing.Size(65, 31);
             this.radio3x3.TabIndex = 4;
@@ -1200,5 +1218,6 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Button btnDeleteLastMedia5;
         private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.ListView lstRelatorio;
+        private System.Windows.Forms.RadioButton radioAll;
     }
 }

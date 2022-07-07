@@ -63,6 +63,16 @@ namespace RubikCubeTimer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap All {
+            get {
+                object obj = ResourceManager.GetObject("All", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cubo2x2 {
             get {
                 object obj = ResourceManager.GetObject("Cubo2x2", resourceCulture);

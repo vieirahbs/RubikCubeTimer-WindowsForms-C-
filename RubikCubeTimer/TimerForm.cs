@@ -78,6 +78,7 @@ namespace RubikCubeTimer
             cbxCubeTypes.Items.Add("Megaminx");
             cbxCubeTypes.Items.Add("Piraminx");
             cbxCubeTypes.Items.Add("Mirror Blocks");
+            cbxCubeTypes.Items.Add("All");
             cbxCubeTypes.SelectedIndex = -1;
 
             StartRecordList();
@@ -181,7 +182,7 @@ namespace RubikCubeTimer
             }
             else
             {
-                return retorno = Record.TipoCubo.ToString();
+                return Record.TipoCubo.ToString();
             }
         }
 
@@ -208,8 +209,6 @@ namespace RubikCubeTimer
                 }
                 else
                 {
-                    string tipoCubo = Record.TipoCubo.ToString().Substring(1);
-
                     return $"Best time in {Record.TipoCubo}: {string.Format("{0:mm\\:ss\\:fff} ", Record.MelhorTempo)}- " +
                                     $"{Record.Data.ToString("dd/MMM/yyyy")}";
                 }
@@ -260,6 +259,10 @@ namespace RubikCubeTimer
             else if (radioMirrorBlocks.Checked)
             {
                 tipoCubo = "Mirror Blocks";
+            }
+            else if (radioAll.Checked)
+            {
+                tipoCubo = "All";
             }
             #endregion
 
@@ -365,6 +368,7 @@ namespace RubikCubeTimer
             }
             else
             {
+                Media5 = Media5.RecuperaMedia5Atual(Usuario.Id, TipoCubo);
                 if (media5TS < Media5.MelhorMedia)
                 {
                     string mensagem = "Well done! You beat your average of 5 in 3x3! Do you want to save it?";
@@ -736,6 +740,21 @@ namespace RubikCubeTimer
                     btnDeleteLastRecord.Visible = false;
                 }
             }
+            else if (cbxCubeTypes.SelectedIndex == 7)
+            {
+                Records = Record.RecuperaRecords(Usuario.Id, CubeType.All);
+                if (Records.Count != 0)
+                {
+                    Record.TipoCubo = Records[0].TipoCubo;
+                    tipoCubo = CubeType.All.ToString();
+                    btnDeleteLastRecord.Visible = true;
+                    btnDeleteLastRecord.Text = $"Delete '{tipoCubo}' last record";
+                }
+                else
+                {
+                    btnDeleteLastRecord.Visible = false;
+                }
+            }
             #endregion
 
             if (Records.Count != 0)
@@ -910,6 +929,20 @@ namespace RubikCubeTimer
             SetTempoTotal();
         }
 
+        private void radioAll_CheckedChanged(object sender, EventArgs e)
+        {
+            StartTimerList();
+            pctLogo.BackgroundImage = Properties.Resources.All;
+            TipoCubo = CubeType.All;
+            lblMelhorTempo.Text = ObtemRecordAtual();
+            btnStartStop.Focus();
+            ContadorMedia5 = 0;
+            Contador = 0;
+            Record.TipoCubo = CubeType.All;
+            SetAverageAndTimerText();
+            SetTempoTotal();
+        }
+
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = (int)Record.TipoCubo - 2;
@@ -923,6 +956,7 @@ namespace RubikCubeTimer
                 cbxCubeTypes.SelectedIndex = -1;
             }
             StartMedia5List();
+            ObtemMedia5Atual();
         }
 
         private void btnDeleteLastRecord_Click(object sender, EventArgs e)
@@ -937,9 +971,17 @@ namespace RubikCubeTimer
                 bool lastRecordDeleted = Record.DeleteLastRecord(Usuario.Id, Record.TipoCubo);
                 if (lastRecordDeleted)
                 {
-                    resultado = MessageBox.Show($"Last record in {tipoCubo} deleted successfully!", this.Text);
+                    MessageBox.Show($"Last record in {tipoCubo} deleted successfully!", this.Text);
                     int index = (int)Record.TipoCubo - 2;
                     FillRecordList(index);
+                    lblMelhorTempo.Text = ObtemRecordAtual();
+
+                    StartTimerList();
+
+                    SetAverageAndTimerText();
+                    TempoTotal = new TimeSpan(0, 0, 0, 0, 0);
+                    ContadorMedia5 = 0;
+                    Contador = 0;
                 }
             }
         }
@@ -953,8 +995,14 @@ namespace RubikCubeTimer
             if (resultado == DialogResult.Yes)
             {
                 Media5.DeleteLastMedia5(Usuario.Id, Media5.TipoCubo);
-                resultado = MessageBox.Show($"Last best average deleted successfully!", this.Text);
+                MessageBox.Show($"Last best average deleted successfully!", this.Text);
                 StartMedia5List();
+                StartTimerList();
+                lblMelhorMedia5.Text = ObtemMedia5Atual();
+                ContadorMedia5 = 0;
+                Contador = 0;
+                TempoTotal = new TimeSpan(0, 0, 0, 0, 0);
+                SetAverageAndTimerText();
             }
         }
 
@@ -962,8 +1010,7 @@ namespace RubikCubeTimer
         {
             Relatorio.ExportReport(Usuario);
         }
+
         #endregion
-
-
     }
 }

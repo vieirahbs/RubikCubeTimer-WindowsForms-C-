@@ -215,9 +215,13 @@ namespace RubikCubeTimer.Entities
             {
                 return "Pyraminx";
             }
-            else
+            else if (tipoCubo == 8)
             {
                 return "Mirror Blocks";
+            }
+            else
+            {
+                return "All";
             }
         }
 
