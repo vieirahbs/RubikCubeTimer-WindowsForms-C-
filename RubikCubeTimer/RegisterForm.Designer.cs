@@ -38,6 +38,7 @@ namespace RubikCubeTimer
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnHideUnhide = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblPassword
@@ -142,12 +143,30 @@ namespace RubikCubeTimer
             this.label2.TabIndex = 14;
             this.label2.Text = "Create your account";
             // 
+            // btnHideUnhide
+            // 
+            this.btnHideUnhide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnHideUnhide.BackColor = System.Drawing.Color.Transparent;
+            this.btnHideUnhide.BackgroundImage = global::RubikCubeTimer.Properties.Resources.EyeOpened;
+            this.btnHideUnhide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnHideUnhide.FlatAppearance.BorderSize = 0;
+            this.btnHideUnhide.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
+            this.btnHideUnhide.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnHideUnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideUnhide.Location = new System.Drawing.Point(540, 214);
+            this.btnHideUnhide.Name = "btnHideUnhide";
+            this.btnHideUnhide.Size = new System.Drawing.Size(37, 37);
+            this.btnHideUnhide.TabIndex = 15;
+            this.btnHideUnhide.UseVisualStyleBackColor = false;
+            this.btnHideUnhide.Click += new System.EventHandler(this.btnHideUnhide_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(686, 347);
+            this.Controls.Add(this.btnHideUnhide);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtName);
@@ -177,5 +196,6 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnHideUnhide;
     }
 }

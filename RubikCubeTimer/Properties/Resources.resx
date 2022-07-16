@@ -130,6 +130,12 @@
   <data name="Cubo5x5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cubo5x5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EyeHidden" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EyeHidden.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EyeOpened" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EyeOpened.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Megaminx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Megaminx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

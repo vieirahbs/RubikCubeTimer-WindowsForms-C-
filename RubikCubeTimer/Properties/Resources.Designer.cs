@@ -103,6 +103,26 @@ namespace RubikCubeTimer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EyeHidden {
+            get {
+                object obj = ResourceManager.GetObject("EyeHidden", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EyeOpened {
+            get {
+                object obj = ResourceManager.GetObject("EyeOpened", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Megaminx {
             get {
                 object obj = ResourceManager.GetObject("Megaminx", resourceCulture);

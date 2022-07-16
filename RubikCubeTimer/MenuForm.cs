@@ -73,5 +73,20 @@ namespace RubikCubeTimer
             }
         }
 
+        private void btnHideUnhide_Click(object sender, EventArgs e)
+        {
+            if (txtSenha.UseSystemPasswordChar == true)
+            {
+                btnHideUnhide.BackgroundImage = Properties.Resources.EyeHidden;
+                txtSenha.UseSystemPasswordChar = false;
+                txtSenha.Focus();
+            }
+            else
+            {
+                btnHideUnhide.BackgroundImage = Properties.Resources.EyeOpened;
+                txtSenha.UseSystemPasswordChar = true;
+                txtSenha.Focus();
+            }
+        }
     }
 }

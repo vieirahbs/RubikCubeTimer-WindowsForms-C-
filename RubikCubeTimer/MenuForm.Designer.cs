@@ -35,6 +35,7 @@ namespace RubikCubeTimer
             this.lblLogo = new System.Windows.Forms.Label();
             this.pctLogo = new System.Windows.Forms.PictureBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.btnHideUnhide = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblLogin = new System.Windows.Forms.Label();
@@ -100,6 +101,7 @@ namespace RubikCubeTimer
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Controls.Add(this.btnHideUnhide);
             this.pnlButtons.Controls.Add(this.label1);
             this.pnlButtons.Controls.Add(this.lblPassword);
             this.pnlButtons.Controls.Add(this.lblLogin);
@@ -111,6 +113,23 @@ namespace RubikCubeTimer
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1294, 338);
             this.pnlButtons.TabIndex = 5;
+            // 
+            // btnHideUnhide
+            // 
+            this.btnHideUnhide.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnHideUnhide.BackColor = System.Drawing.Color.Transparent;
+            this.btnHideUnhide.BackgroundImage = global::RubikCubeTimer.Properties.Resources.EyeOpened;
+            this.btnHideUnhide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnHideUnhide.FlatAppearance.BorderSize = 0;
+            this.btnHideUnhide.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
+            this.btnHideUnhide.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnHideUnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideUnhide.Location = new System.Drawing.Point(817, 95);
+            this.btnHideUnhide.Name = "btnHideUnhide";
+            this.btnHideUnhide.Size = new System.Drawing.Size(37, 37);
+            this.btnHideUnhide.TabIndex = 8;
+            this.btnHideUnhide.UseVisualStyleBackColor = false;
+            this.btnHideUnhide.Click += new System.EventHandler(this.btnHideUnhide_Click);
             // 
             // label1
             // 
@@ -244,5 +263,6 @@ namespace RubikCubeTimer
         private System.Windows.Forms.Panel pnlRubikImage;
         private System.Windows.Forms.Label lblLogo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnHideUnhide;
     }
 }
