@@ -833,6 +833,7 @@ namespace RubikCubeTimer
         }
         private void radio2x2_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.Cubo2x2;
             TipoCubo = CubeType.C2x2;
@@ -847,6 +848,7 @@ namespace RubikCubeTimer
 
         private void radio3x3_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.RubikCube;
             TipoCubo = CubeType.C3x3;
@@ -861,6 +863,7 @@ namespace RubikCubeTimer
 
         private void radio4x4_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.Cubo4x4;
             TipoCubo = CubeType.C4x4;
@@ -875,6 +878,7 @@ namespace RubikCubeTimer
 
         private void radio5x5_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.Cubo5x5;
             TipoCubo = CubeType.C5x5;
@@ -889,6 +893,7 @@ namespace RubikCubeTimer
 
         private void radioMegaminx_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.Megaminx;
             TipoCubo = CubeType.Megaminx;
@@ -903,6 +908,7 @@ namespace RubikCubeTimer
 
         private void radioPyraminx_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.Pyraminx;
             TipoCubo = CubeType.Piraminx;
@@ -917,6 +923,7 @@ namespace RubikCubeTimer
 
         private void radioMirrorBlocks_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.MirrorBlocks;
             TipoCubo = CubeType.MirrorBlocks;
@@ -931,6 +938,7 @@ namespace RubikCubeTimer
 
         private void radioAll_CheckedChanged(object sender, EventArgs e)
         {
+            btmReset_Click(this, new EventArgs());
             StartTimerList();
             pctLogo.BackgroundImage = Properties.Resources.All;
             TipoCubo = CubeType.All;
